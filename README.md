@@ -14,13 +14,13 @@ The three sample applications should compile easily: launch Lazarus and choose P
 
 The project basic.lpr shows a 2D square. You can drag the mouse to spin the square. Since Core OpenGL does not support GL_QUADS, we draw the square using a [GL_TRIANGLE_STRIP](http://stackoverflow.com/questions/16882474/is-there-a-clear-performance-difference-between-gl-quads-and-gl-triangle-strip).
 
-![alt tag](https://raw.githubusercontent.com/neurolabusc/OpenGLCore/master/basic.jpg)
+![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/basic.jpg)
 
 ##### Project 2: Cube
 
 The project cube.lpr shows a colored 3D cube. You can drag the mouse to spin the cube. Since Core OpenGL does not support GL_MODELVIEW and GL_PROJECTIONVIEW, this project uses equivalent functions (nGL_MODELVIEW and nGL_PROJECTIONVIEW) from the unit gl_core_utils.
 
-![alt tag](https://raw.githubusercontent.com/neurolabusc/OpenGLCore/master/cube.jpg)
+![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/cube.jpg)
 
 ##### Project 3: Render
 
@@ -28,7 +28,7 @@ The project render.lpr create volume renderings - by default it generates a 'bor
 
 Volume renderers are often [two pass, but can also be computed in a single pass](http://prideout.net/blog/?p=64). This project can be compiled for either mode, depending on whether the compiler directive '{$DEFINE TWO_PASS}' is enabled or not. There is no  meaningful performance difference between these two modes (the single pass eliminates a 2D texture lookup per ray, but for complex volumes we are computing thousands of 3D texture lookups). However, the single pass method is simpler to implement as you do not need to manage a framebuffer for the cube's back face.
 
-![alt tag](https://raw.githubusercontent.com/neurolabusc/OpenGLCore/master/render.jpg)
+![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/render.jpg)
 
 ##### Recent Versions
 
