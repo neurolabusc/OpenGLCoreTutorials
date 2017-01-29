@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="9">
+      <Unit0>
+        <Filename Value="basic.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="basicmain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="134"/>
+        <CursorPos Y="158"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="/usr/local/share/fpcsrc/packages/opengl/src/gl.pp"/>
+        <UnitName Value="GL"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1864"/>
+        <CursorPos Y="1870"/>
+        <UsageCount Value="10"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="glext.pp"/>
+        <UnitName Value="GLext"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="11398"/>
+        <CursorPos X="24" Y="5164"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="glcorearb.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="2290"/>
+        <CursorPos X="30" Y="2296"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/inc/systemh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="399"/>
+        <CursorPos X="3" Y="406"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/inc/dynlibs.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="51"/>
+        <CursorPos X="10" Y="58"/>
+        <UsageCount Value="10"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/math.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="614"/>
+        <CursorPos X="10" Y="621"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="gl_core_utils.pas"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="14" Y="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit8>
+    </Units>
+    <JumpHistory Count="25" HistoryIndex="24">
+      <Position1>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="1828" Column="63" TopLine="1816"/>
+      </Position1>
+      <Position2>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="97" Column="25" TopLine="90"/>
+      </Position2>
+      <Position3>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="2527" Column="27" TopLine="2526"/>
+      </Position3>
+      <Position4>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3113" Column="5" TopLine="3100"/>
+      </Position4>
+      <Position5>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="18" Column="71" TopLine="8"/>
+      </Position5>
+      <Position6>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3099" Column="5" TopLine="3097"/>
+      </Position6>
+      <Position7>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3106" Column="41" TopLine="3098"/>
+      </Position7>
+      <Position8>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="1462" Column="73" TopLine="1456"/>
+      </Position8>
+      <Position9>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="2292" Column="20" TopLine="2287"/>
+      </Position9>
+      <Position10>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="169" Column="30" TopLine="164"/>
+      </Position10>
+      <Position11>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="516" Column="87" TopLine="513"/>
+      </Position11>
+      <Position12>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="175" Column="29" TopLine="169"/>
+      </Position12>
+      <Position13>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="32" Column="111" TopLine="31"/>
+      </Position13>
+      <Position14>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="1594" Column="58" TopLine="1592"/>
+      </Position14>
+      <Position15>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3090" Column="39" TopLine="3090"/>
+      </Position15>
+      <Position16>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3" Column="103"/>
+      </Position16>
+      <Position17>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="1608" Column="47" TopLine="1599"/>
+      </Position17>
+      <Position18>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3093" TopLine="3086"/>
+      </Position18>
+      <Position19>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="3099" Column="16" TopLine="3091"/>
+      </Position19>
+      <Position20>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="77" Column="108" TopLine="76"/>
+      </Position20>
+      <Position21>
+        <Filename Value="glcorearb.pas"/>
+        <Caret Line="1633" Column="17" TopLine="1624"/>
+      </Position21>
+      <Position22>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="4" Column="32"/>
+      </Position22>
+      <Position23>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="14" Column="8"/>
+      </Position23>
+      <Position24>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="13" Column="27"/>
+      </Position24>
+      <Position25>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="22" TopLine="2"/>
+      </Position25>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

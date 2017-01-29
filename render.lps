@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="3">
+      <Unit0>
+        <Filename Value="render.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="21"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="rendermain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="614"/>
+        <CursorPos X="26" Y="635"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="loadNifti.pas"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="22"/>
+        <CursorPos Y="24"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+    </Units>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="6" Column="4"/>
+      </Position1>
+      <Position2>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="216" Column="14" TopLine="197"/>
+      </Position2>
+      <Position3>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="217" Column="4" TopLine="199"/>
+      </Position3>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

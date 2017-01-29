@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="2">
+      <Unit0>
+        <Filename Value="cube.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="cubemain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="211"/>
+        <CursorPos X="13" Y="232"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+    </Units>
+    <JumpHistory Count="19" HistoryIndex="18">
+      <Position1>
+        <Filename Value="cubemain.pas"/>
+      </Position1>
+      <Position2>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="14"/>
+      </Position2>
+      <Position3>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="148" TopLine="132"/>
+      </Position3>
+      <Position4>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="239" TopLine="217"/>
+      </Position4>
+      <Position5>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="17" Column="20" TopLine="9"/>
+      </Position5>
+      <Position6>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="47" Column="17" TopLine="35"/>
+      </Position6>
+      <Position7>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="208" Column="9" TopLine="200"/>
+      </Position7>
+      <Position8>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="116" Column="22" TopLine="104"/>
+      </Position8>
+      <Position9>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="125" Column="29" TopLine="107"/>
+      </Position9>
+      <Position10>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="126" Column="24" TopLine="115"/>
+      </Position10>
+      <Position11>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="127" Column="21" TopLine="115"/>
+      </Position11>
+      <Position12>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="131" Column="41" TopLine="119"/>
+      </Position12>
+      <Position13>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="137" Column="27" TopLine="119"/>
+      </Position13>
+      <Position14>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="175" Column="9" TopLine="157"/>
+      </Position14>
+      <Position15>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="176" Column="24" TopLine="164"/>
+      </Position15>
+      <Position16>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="187" Column="55" TopLine="170"/>
+      </Position16>
+      <Position17>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="209" Column="20" TopLine="195"/>
+      </Position17>
+      <Position18>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="231" Column="32" TopLine="217"/>
+      </Position18>
+      <Position19>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="232" Column="33" TopLine="217"/>
+      </Position19>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

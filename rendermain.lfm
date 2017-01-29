@@ -1,0 +1,99 @@
+object GLForm1: TGLForm1
+  Left = 307
+  Height = 302
+  Top = 150
+  Width = 510
+  Caption = 'GLForm1'
+  ClientHeight = 302
+  ClientWidth = 510
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnResize = FormResize
+  LCLVersion = '1.7'
+  object GLBox: TOpenGLControl
+    Left = 0
+    Height = 302
+    Top = 0
+    Width = 510
+    Align = alClient
+    AutoResizeViewport = True
+    OpenGLMajorVersion = 3
+    OpenGLMinorVersion = 3
+    MultiSampling = 4
+    OnMouseDown = MouseDown
+    OnMouseMove = MouseMove
+    OnMouseUp = MouseUp
+    OnMouseWheel = MouseWheel
+    OnPaint = GLboxPaint
+  end
+  object MainMenu1: TMainMenu
+    left = 24
+    top = 184
+    object AppleMenu: TMenuItem
+      Caption = ''
+      Visible = False
+      object AppleAbout: TMenuItem
+        Caption = 'About'
+        OnClick = About1Click
+      end
+    end
+    object FileMenu: TMenuItem
+      Caption = 'File'
+      object OpenMenu: TMenuItem
+        Caption = 'Open'
+        OnClick = OpenMenuClick
+      end
+    end
+    object ViewMenu: TMenuItem
+      Caption = 'View'
+      object BackColorMenu: TMenuItem
+        Caption = 'Back color'
+        OnClick = BackColorMenuClick
+      end
+      object PerspectiveMenu: TMenuItem
+        Caption = 'Perspective'
+        RadioItem = True
+        OnClick = PerspectiveMenuClick
+      end
+    end
+    object HelpMenu: TMenuItem
+      Caption = 'Help'
+      object AboutMenu: TMenuItem
+        Caption = 'About'
+        OnClick = About1Click
+      end
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 24
+    top = 120
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'NIfti (.nii;.nii.gz)|.nii;.nii.gz'
+    left = 24
+    top = 16
+  end
+end

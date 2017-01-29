@@ -1,0 +1,27 @@
+object GLForm1: TGLForm1
+  Left = 169
+  Height = 302
+  Top = 360
+  Width = 510
+  Caption = 'GLForm1'
+  ClientHeight = 302
+  ClientWidth = 510
+  OnCreate = FormCreate
+  LCLVersion = '1.7'
+  object GLBox: TOpenGLControl
+    Left = 0
+    Height = 302
+    Top = 0
+    Width = 510
+    Align = alClient
+    AutoResizeViewport = True
+    OpenGLMajorVersion = 3
+    OpenGLMinorVersion = 3
+    MultiSampling = 4
+    OnMouseDown = MouseDown
+    OnMouseMove = MouseMove
+    OnMouseUp = MouseUp
+    OnMouseWheel = MouseWheel
+    OnPaint = GLboxPaint
+  end
+end
