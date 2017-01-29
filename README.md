@@ -1,8 +1,8 @@
-# Simple Polygon Viewer
+# OpenGLCoreTutorials
 
 ##### About
 
-The tag line of Lazarus is "write once, compile anywhere", allowing developers to rapidly develop software for Linux, MacOS and Windows. However, developing OpenGL applications represents a challenge, as MacOS [drops deprecated features](http://renderingpipeline.com/2012/04/sad-state-of-opengl-on-macos-x/) from OpenGL (the *core* profile). Therefore, to support all three major desktop platforms one must either target OpenGL 2.1 (the last legacy version supported by MacOS, with GLSL version 1.2) or OpenGL 3.3 *core* [MacOS 10.7 introduced OpenGL 3.2 (GLSL 1.5) while recent versions support from 3.3(3.3)-4.1(4.1)](https://developer.apple.com/opengl/capabilities/)). This is unlike Linux and Windows, where the drivers support the legacy OpenGL features (so you can mix and match modern functions with deprecated functions).
+The tag line of Lazarus is "write once, compile anywhere", allowing developers to rapidly develop software for Linux, MacOS and Windows. However, developing OpenGL applications represents a challenge, as MacOS [drops deprecated features](http://renderingpipeline.com/2012/04/sad-state-of-opengl-on-macos-x/) from OpenGL (the **core** profile). Therefore, to support all three major desktop platforms one must either target OpenGL 2.1 (the last legacy version supported by MacOS, with GLSL version 1.2) or OpenGL 3.3 **core** [MacOS 10.7 introduced OpenGL 3.2 (GLSL 1.5) while recent versions support from 3.3(3.3)-4.1(4.1)](https://developer.apple.com/opengl/capabilities/)). This is unlike Linux and Windows, where the drivers support the legacy OpenGL features (so you can mix and match modern functions with deprecated functions).
 
 There are nice [tutorials for legacy OpenGL](http://wiki.freepascal.org/OpenGL_Tutorial). However, those tutorials describe many tutorial features that do not exist in the core specification (e.g. GL_QUADS, glVertex3f, GL_MODELVIEW). The three tutorials below illustrate how to write modern OpenGL applications. A nice feature of Core OpenGL is that it is very similar to the OpenGL ES versions used by many phones and tablets.
 
@@ -44,4 +44,3 @@ Volume renderers are often [two pass, but can also be computed in a single pass]
 
  - [Surf Ice is an advanced mesh viewing application that can be compiled for either legacy or core OpenGL](https://github.com/neurolabusc/surf-ice)
 
-# OpenGLCoreTutorials
