@@ -6,7 +6,7 @@ interface
 uses
   glcorearb, gl_core_matrix, gl_core_utils, OpenGLContext,
   Classes, SysUtils, FileUtil,  Forms, Controls, Graphics,
-  Dialogs, StdCtrls, ExtCtrls, Menus,  Types, loadNifti,  math;
+  Dialogs, ExtCtrls, Menus,  Types, loadNifti,  math;
 
 type
    TGLForm1 = class(TForm)

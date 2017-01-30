@@ -1,4 +1,4 @@
-program cube;
+program cubepro;
 
 {$mode objfpc}{$H+}
 

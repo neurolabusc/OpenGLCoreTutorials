@@ -5,7 +5,7 @@
     <General>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="cube"/>
+      <Title Value="cubepro"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
     </General>
@@ -30,7 +30,7 @@
     </RequiredPackages>
     <Units Count="2">
       <Unit0>
-        <Filename Value="cube.lpr"/>
+        <Filename Value="cubepro.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
@@ -45,7 +45,7 @@
   <CompilerOptions>
     <Version Value="11"/>
     <Target>
-      <Filename Value="cube"/>
+      <Filename Value="cubepro"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>

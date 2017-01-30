@@ -3,11 +3,11 @@
   <ProjectSession>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="render.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="23"/>
       </Unit0>
       <Unit1>
         <Filename Value="rendermain.pas"/>
@@ -15,23 +15,28 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="614"/>
-        <CursorPos X="26" Y="635"/>
-        <UsageCount Value="21"/>
+        <CursorPos X="31" Y="7"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="loadNifti.pas"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="22"/>
         <CursorPos Y="24"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="gl_core_utils.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
         <Filename Value="rendermain.pas"/>
         <Caret Line="6" Column="4"/>
@@ -44,6 +49,38 @@
         <Filename Value="rendermain.pas"/>
         <Caret Line="217" Column="4" TopLine="199"/>
       </Position3>
+      <Position4>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="9" Column="11"/>
+      </Position4>
+      <Position5>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="593" Column="3" TopLine="583"/>
+      </Position5>
+      <Position6>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="31" Column="25" TopLine="21"/>
+      </Position6>
+      <Position7>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="77" Column="9" TopLine="75"/>
+      </Position7>
+      <Position8>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="93" Column="19" TopLine="75"/>
+      </Position8>
+      <Position9>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="285" Column="30" TopLine="285"/>
+      </Position9>
+      <Position10>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="563" Column="14" TopLine="545"/>
+      </Position10>
+      <Position11>
+        <Filename Value="rendermain.pas"/>
+        <Caret Line="7" Column="31"/>
+      </Position11>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

@@ -8,7 +8,7 @@ There are nice [tutorials for legacy OpenGL](http://wiki.freepascal.org/OpenGL_T
 
 ##### Compiling
 
-The three sample applications should compile easily: launch Lazarus and choose Project/OpenProject, then select Run/Run to compile and execute the project. However, there is one wrinkle for MacOS users: Lazarus uses the Carbon widgetset by default, but you must use the Cocoa widgetset to exploit OpenGL core. To change the widgetset, select Project/ProjectOptions, select the "Additions and Overrides" tab and click the LCLWidgetType pull-down to select "Cocoa". Once you do this, the applications should compile easily.
+The three sample applications should compile easily (assuming you are using Lazarus 1.6.2 or later): launch Lazarus and choose Project/OpenProject, then select Run/Run to compile and execute the project. However, there is one wrinkle for MacOS users: Lazarus uses the Carbon widgetset by default, but you must use the Cocoa widgetset to exploit OpenGL core. To change the widgetset, select Project/ProjectOptions, select the "Additions and Overrides" tab and click the LCLWidgetType pull-down to select "Cocoa". Once you do this, the applications should compile easily.
 
 ##### Project 1: Basic
 

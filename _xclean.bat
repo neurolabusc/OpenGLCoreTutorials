@@ -6,8 +6,8 @@ rm -r *.bak
 rm -rf lib
 rm -rf backup
 rm basic
-rm cube
+rm cubepro
 rm render
 rm -rf basic.app
-rm -rf cube.app
+rm -rf cubepro.app
 rm -rf render.app

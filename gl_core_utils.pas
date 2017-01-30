@@ -16,7 +16,7 @@ var
   maxLength : GLint;
 begin
   glGetShaderiv(glObjectID, GL_INFO_LOG_LENGTH, @maxLength);
-  if (maxLength < 1) then exit;
+  if (maxLength < 2) then exit;
   setlength(s, maxLength);
   glGetShaderInfoLog(glObjectID, maxLength, @maxLength, @s[1]);
   s:=trim(s);
