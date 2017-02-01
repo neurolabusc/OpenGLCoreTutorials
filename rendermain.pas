@@ -29,9 +29,9 @@ type
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure FormResize(Sender: TObject);
     procedure GLboxPaint(Sender: TObject);
-    procedure MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer); reintroduce;
+    procedure MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); reintroduce;
+    procedure MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); reintroduce;
     procedure OpenMenuClick(Sender: TObject);
     procedure PerspectiveMenuClick(Sender: TObject);
     procedure ShaderCheckClick(Sender: TObject);
@@ -82,17 +82,17 @@ procedure TGLForm1.About1Click(Sender: TObject);
 const
   kSamp = 72;
 var
-  s: dword;
+  s: QWord;
   i: integer;
    fpsstr: string;
 begin
- s := gettickcount;
+ s := gettickcount64;
  fpsstr := '';
  for i := 1 to kSamp do begin
      gPrefs.Azimuth := (gPrefs.Azimuth + 5) mod 360;
      GLbox.Repaint;
   end;
-  fpsstr := ' FPS '+floattostr((kSamp*1000)/(gettickcount-s)) ;
+  fpsstr := ' FPS '+floattostr((kSamp*1000)/(gettickcount64-s)) ;
   MessageDlg(fpsstr,mtInformation,[mbAbort, mbOK],0);
 end;
 
@@ -227,7 +227,7 @@ begin
   result := 1/f;
 end;
 
-procedure sph2cartDeg90(Azimuth,Elevation: single; var lX,lY,lZ: single);
+procedure sph2cartDeg90(Azimuth,Elevation: single; out lX,lY,lZ: single);
 //convert spherical AZIMUTH,ELEVATION,RANGE to Cartesion
 //see Matlab's [x,y,z] = sph2cart(THETA,PHI,R)
 // reverse with cart2sph
@@ -329,18 +329,16 @@ begin
   GLBox.SwapBuffers;
 end;
 
-
-const kVert = '#version 330 core'
-+#10'layout(location = 0) in vec3 vPos;'
-+#10'out vec3 TexCoord1;'
-+#10'uniform mat4 ModelViewProjectionMatrix;'
-+#10'void main() {'
-+#10'    TexCoord1 = vPos;'
-+#10'    gl_Position = ModelViewProjectionMatrix * vec4(vPos, 1.0);'
-+#10'}';
-
  {$IFDEF TWO_PASS}
- kFrag ='#version 330 core'
+ const kVert = '#version 330 core'
+ +#10'layout(location = 0) in vec3 vPos;'
+ +#10'out vec3 TexCoord1;'
+ +#10'uniform mat4 ModelViewProjectionMatrix;'
+ +#10'void main() {'
+ +#10'    TexCoord1 = vPos;'
+ +#10'    gl_Position = ModelViewProjectionMatrix * vec4(vPos, 1.0);'
+ +#10'}';
+  kFrag ='#version 330 core'
 +#10'in vec3 TexCoord1;'
 +#10'out vec4 FragColor;'
 +#10'uniform int loops;'
@@ -411,9 +409,21 @@ const kFragBackface = '#version 330 core'
 +#10'}';
  {$ELSE TWO_PASS}
  //single-pass rendering inspired by http://prideout.net/blog/?p=64
+ const kVert = '#version 330 core'
++#10'layout(location = 0) in vec3 vPos;'
++#10'out vec3 TexCoord1;'
++#10'out vec4 vPosition;'
++#10'uniform mat4 ModelViewProjectionMatrix;'
++#10'void main() {'
++#10'  TexCoord1 = vPos;'
++#10'  gl_Position = ModelViewProjectionMatrix * vec4(vPos, 1.0);'
++#10'  vPosition = gl_Position;'
++#10'}';
+
  kFrag ='#version 330 core'
 +#10'in vec3 TexCoord1;'
 +#10'out vec4 FragColor;'
++#10'in vec4 vPosition;'
 +#10'uniform mat4 ModelViewMatrixInverse, ModelViewProjectionMatrixInverse;'
 +#10'uniform int loops;'
 +#10'uniform float stepSize, sliceSize;'
@@ -423,8 +433,26 @@ const kFragBackface = '#version 330 core'
 +#10'uniform float diffuse = 0.3;'
 +#10'uniform float specular = 0.25;'
 +#10'uniform float shininess = 10.0;'
-+#10'vec3 GetBackPosition (vec3 startPosition) {'
-+#10'	vec3 rayDir =  normalize(ModelViewProjectionMatrixInverse * vec4(0.0,0.0,1.0,0.0)).xyz;'
++#10'vec3 GetBackPosition (vec3 startPosition) { //when does ray exit unit cube http://prideout.net/blog/?p=64'
++#10'	//next line only works for orthographic projections:'
++#10'	// vec3 rayDir =  normalize(ModelViewProjectionMatrixInverse * vec4(0.0,0.0,1.0,0.0)).xyz;'
++#10'	//https://github.com/almarklein/visvis/blob/master/core/shaders_3.py'
++#10'	// Calculate ray. In projective view the result is ok at the vertices'
++#10'	// but in between there can be all kind of non-linear bending of the'
++#10'	// rays. To solve this, one should use a denser grid of vertex-texture'
++#10'	// pairs. In textures.py, this is done by partitioning the quads.'
++#10'	// Get location of vertex in device coordinates'
++#10'	//float w = max(1.0, vPosition.w);'
++#10'	vec4 refPos1 = vPosition * vPosition.w;'
++#10'	// Calculate point right behind it. Distance depends on w-value'
++#10'	// to prevent wobly artifacts at low field of views.'
++#10'	float zdist = max(1.0, vPosition.w/10.0);'
++#10'	zdist *= vPosition.z/abs(vPosition.z); //required for orthographic'
++#10'	vec4 refPos2 = refPos1 + vec4(0.0, 0.0, zdist, 0.0);'
++#10'	// Project back to world coordinates to calculate ray direction'
++#10'	vec4 p1 = ModelViewProjectionMatrixInverse * refPos1;'
++#10'	vec4 p2 = ModelViewProjectionMatrixInverse * refPos2;'
++#10'	vec3 rayDir = normalize((p1.xyz/p1.w)-(p2.xyz/p2.w) );'
 +#10'	vec3 invR = 1.0 / rayDir;'
 +#10'    vec3 tbot = invR * (vec3(0.0)-startPosition);'
 +#10'    vec3 ttop = invR * (vec3(1.0)-startPosition);'
@@ -510,7 +538,7 @@ begin
   gPrefs.viewHeightLoc := glGetUniformLocation(gPrefs.programRaycast, pAnsiChar('viewHeight'));
   gPrefs.viewWidthLoc := glGetUniformLocation(gPrefs.programRaycast, pAnsiChar('viewWidth'));
   {$ELSE}
-  GLForm1.PerspectiveMenu.visible := false; //not supported
+  //GLForm1.PerspectiveMenu.visible := false; //not supported
   gPrefs.imvpLoc := glGetUniformLocation(gPrefs.programRaycast, pAnsiChar('ModelViewProjectionMatrixInverse'));
   {$ENDIF}
   gPrefs.sliceSizeLoc := glGetUniformLocation(gPrefs.programRaycast, pAnsiChar('sliceSize'));
