@@ -1,7 +1,7 @@
 object GLForm1: TGLForm1
-  Left = 606
+  Left = 431
   Height = 302
-  Top = 129
+  Top = 128
   Width = 510
   Caption = 'GLForm1'
   ClientHeight = 302
@@ -9,6 +9,7 @@ object GLForm1: TGLForm1
   Menu = MainMenu1
   OnCreate = FormCreate
   OnResize = FormResize
+  Position = poScreenCenter
   LCLVersion = '1.7'
   object GLBox: TOpenGLControl
     Left = 0
@@ -20,10 +21,10 @@ object GLForm1: TGLForm1
     OpenGLMajorVersion = 3
     OpenGLMinorVersion = 3
     MultiSampling = 4
-    OnMouseDown = MouseDown
-    OnMouseMove = MouseMove
-    OnMouseUp = MouseUp
-    OnMouseWheel = MouseWheel
+    OnMouseDown = GLMouseDown
+    OnMouseMove = GLMouseMove
+    OnMouseUp = GLMouseUp
+    OnMouseWheel = GLMouseWheel
     OnPaint = GLboxPaint
   end
   object MainMenu1: TMainMenu

@@ -25,13 +25,13 @@ type
     OpenMenu: TMenuItem;
     procedure BackColorMenuClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure MouseWheel(Sender: TObject; Shift: TShiftState;
+    procedure GLMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure FormResize(Sender: TObject);
     procedure GLboxPaint(Sender: TObject);
-    procedure MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer); reintroduce;
-    procedure MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); reintroduce;
-    procedure MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); reintroduce;
+    procedure GLMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure GLMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure GLMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure OpenMenuClick(Sender: TObject);
     procedure PerspectiveMenuClick(Sender: TObject);
     procedure ShaderCheckClick(Sender: TObject);
@@ -559,7 +559,7 @@ begin
   end;
 end;
 
-procedure TGLForm1.MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TGLForm1.GLMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
  if gMouse.Y < 0 then exit; //mouse is not down
  gPrefs.Azimuth := gPrefs.Azimuth + (X - gMouse.X);
@@ -573,12 +573,12 @@ begin
  GLBox.Invalidate;
 end;
 
-procedure TGLForm1.MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TGLForm1.GLMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
      gMouse.Y := -1; //released
 end;
 
-procedure TGLForm1.MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TGLForm1.GLMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
      gMouse.Y := Y;
      gMouse.X := X;
@@ -629,7 +629,7 @@ begin
   GLBox.invalidate;
 end;
 
-procedure TGLForm1.MouseWheel(Sender: TObject; Shift: TShiftState;
+procedure TGLForm1.GLMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
   if Wheeldelta < 0 then

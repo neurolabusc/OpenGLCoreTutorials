@@ -291,7 +291,7 @@ Begin
   VolRGBA := nil;
 end;
 
-procedure LoadBorg(Dim: integer; var  rawData: tVolB; var Xo,Yo,Zo, isRGBA: integer; var ScaleDim: TScale);
+procedure LoadBorg(Dim: integer; out  rawData: tVolB; out Xo,Yo,Zo, isRGBA: integer; var ScaleDim: TScale);
 const
  Border = 4;//margin so we can calculate gradients at edge
 var
@@ -403,7 +403,7 @@ begin
    FS1.Free;
 end;
 {$ELSE}
-function LoadGZ(FileName : AnsiString; var  rawData: tVolB; var lHdr: TNIFTIHdr): boolean;// Load 3D data                                 }
+function LoadGZ(FileName : AnsiString; var  rawData: tVolB; out lHdr: TNIFTIHdr): boolean;// Load 3D data                                 }
 //FSL compressed nii.gz file
 var
   Stream: TGZFileStream;
@@ -411,7 +411,7 @@ begin
  result := false;
  Stream := TGZFileStream.Create (FileName, gzopenread);
  Try
-  Stream.ReadBuffer (lHdr, SizeOf (TNIFTIHdr));
+  {$warn 5058 off}Stream.ReadBuffer (lHdr, SizeOf (TNIFTIHdr));{$warn 5058 on}
   if lHdr.HdrSz <> SizeOf (TNIFTIHdr) then begin
    Showdebug('Unable to read image '+Filename+' - this software can only read uncompressed NIfTI files with the same endianess as the host CPU.');
    exit;
