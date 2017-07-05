@@ -26,18 +26,24 @@ The project cubepro.lpr shows a colored 3D cube. You can drag the mouse to spin 
 
 ##### Project 3: Render
 
-The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-positions the fish, and using the scroll wheel adjusts the size of the fish.
-
-![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/render.jpg)
-
-##### Project 4: Textures
-
 The project render.lpr create volume renderings - by default it generates a 'borg' cube, but you can load any NIfTI format image, for example the brain image included with this project. This project is a simple extension of the cube project: note that the colors of the cube in the previous project map their XYZ position as red, green and blue. We can use these 3 dimensions to map the three dimensions of our 3D textures.
 
 Volume renderers are often [two pass, but can also be computed in a single pass](http://prideout.net/blog/?p=64). This project can be compiled for either mode, depending on whether the compiler directive '{$DEFINE TWO_PASS}' is enabled or not. There is no  meaningful performance difference between these two modes (the single pass eliminates a 2D texture lookup per ray, but for complex volumes we are computing hundreds of 3D texture lookups). However, the single pass method is simpler to implement as you do not need to manage a framebuffer for the cube's back face.
 
-![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/textures.jpg)
 
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/render.jpg" width="271">
+
+##### Project 4: Textures
+
+The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-positions the fish, and using the scroll wheel adjusts the size of the fish.
+
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/textures.jpg" width="271">
+
+##### Project 5: Text
+
+The project text.lpr draws text on the screen. Since OpenGL is specialized for drawing triangles, it is surprisingly hard to create nice text (which tends to exhibit smooth curves). This project uses [distance field fonts](http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf) using the technique described [here](https://github.com/libgdx/libgdx/wiki/Distance-field-fonts). The project reads [Hiero](https://github.com/libgdx/libgdx/wiki/Hiero) format fnt/png files, so you can create your own fonts if you wish. By default, the shaders use [supersampling](http://www.java-gaming.org/index.php?topic=33612.0) to enhance the quality. For a related WebGL-based implementation [click here](https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817). As a bonus, an analogous project textLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
+
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/font.png" width="421">
 
 ##### Recent Versions
 

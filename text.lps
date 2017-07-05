@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <Units Count="17">
+      <Unit0>
+        <Filename Value="text.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="113"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="textmain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="126"/>
+        <CursorPos X="23" Y="140"/>
+        <UsageCount Value="113"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="gltext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="375"/>
+        <CursorPos X="66" Y="395"/>
+        <UsageCount Value="43"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="texmain.pas"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UsageCount Value="19"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="basic.lpr"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="12"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="basicmain.pas"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="140"/>
+        <CursorPos X="6" Y="145"/>
+        <UsageCount Value="13"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="/usr/local/share/fpcsrc/packages/opengl/src/gl.pp"/>
+        <UnitName Value="GL"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1864"/>
+        <CursorPos Y="1870"/>
+        <UsageCount Value="2"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="glext.pp"/>
+        <UnitName Value="GLext"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="11398"/>
+        <CursorPos X="24" Y="5164"/>
+        <UsageCount Value="2"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="glcorearb.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="399"/>
+        <CursorPos X="10" Y="399"/>
+        <UsageCount Value="54"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/inc/systemh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="399"/>
+        <CursorPos X="3" Y="406"/>
+        <UsageCount Value="2"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/inc/dynlibs.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="51"/>
+        <CursorPos X="10" Y="58"/>
+        <UsageCount Value="2"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="/usr/local/share/fpcsrc/rtl/objpas/math.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="614"/>
+        <CursorPos X="10" Y="621"/>
+        <UsageCount Value="2"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="gl_core_utils.pas"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="30" Y="6"/>
+        <UsageCount Value="47"/>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="gl_core_matrix.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="20"/>
+        <UsageCount Value="46"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../../../lazarus/lcl/controls.pp"/>
+        <UnitName Value="Controls"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1644"/>
+        <CursorPos X="14" Y="1650"/>
+        <UsageCount Value="2"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../../lazarus/components/tachart/tadrawutils.pas"/>
+        <UnitName Value="TADrawUtils"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="185"/>
+        <CursorPos X="27" Y="194"/>
+        <UsageCount Value="9"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../../lazarus/lcl/graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="932"/>
+        <CursorPos X="3" Y="941"/>
+        <UsageCount Value="9"/>
+      </Unit16>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="339" Column="26" TopLine="333"/>
+      </Position1>
+      <Position2>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="409" Column="10" TopLine="391"/>
+      </Position2>
+      <Position3>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="37" Column="22" TopLine="26"/>
+      </Position3>
+      <Position4>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="301" Column="45" TopLine="301"/>
+      </Position4>
+      <Position5>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="393" Column="46" TopLine="374"/>
+      </Position5>
+      <Position6>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="411" Column="29" TopLine="391"/>
+      </Position6>
+      <Position7>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="34" Column="34" TopLine="22"/>
+      </Position7>
+      <Position8>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="35" Column="29" TopLine="22"/>
+      </Position8>
+      <Position9>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="319" Column="33" TopLine="296"/>
+      </Position9>
+      <Position10>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="416" Column="17" TopLine="397"/>
+      </Position10>
+      <Position11>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="37" Column="44" TopLine="23"/>
+      </Position11>
+      <Position12>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="391" Column="31" TopLine="381"/>
+      </Position12>
+      <Position13>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="131" Column="10" TopLine="131"/>
+      </Position13>
+      <Position14>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="395" Column="9" TopLine="382"/>
+      </Position14>
+      <Position15>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="115" Column="27" TopLine="103"/>
+      </Position15>
+      <Position16>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="385" Column="29" TopLine="369"/>
+      </Position16>
+      <Position17>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="389" Column="42" TopLine="369"/>
+      </Position17>
+      <Position18>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="391" Column="27" TopLine="371"/>
+      </Position18>
+      <Position19>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="48" Column="59" TopLine="30"/>
+      </Position19>
+      <Position20>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="418" Column="49" TopLine="408"/>
+      </Position20>
+      <Position21>
+        <Filename Value="textmain.pas"/>
+        <Caret Line="137" Column="50" TopLine="127"/>
+      </Position21>
+      <Position22>
+        <Filename Value="textmain.pas"/>
+        <Caret Line="131" Column="28" TopLine="121"/>
+      </Position22>
+      <Position23>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="417" Column="17" TopLine="408"/>
+      </Position23>
+      <Position24>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="37" Column="21" TopLine="25"/>
+      </Position24>
+      <Position25>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="43" Column="72" TopLine="40"/>
+      </Position25>
+      <Position26>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="48" Column="71" TopLine="40"/>
+      </Position26>
+      <Position27>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="395" Column="74" TopLine="375"/>
+      </Position27>
+      <Position28>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="417" Column="17" TopLine="402"/>
+      </Position28>
+      <Position29>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="37" Column="21" TopLine="24"/>
+      </Position29>
+      <Position30>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="48" Column="71" TopLine="44"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
