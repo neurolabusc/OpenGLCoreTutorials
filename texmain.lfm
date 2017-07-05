@@ -6,9 +6,10 @@ object GLForm1: TGLForm1
   Caption = 'GLForm1'
   ClientHeight = 240
   ClientWidth = 320
-  OnCreate = FormCreate
+  OnShow = FormShow
   LCLVersion = '1.9.0.0'
   object GLbox: TOpenGLControl
+    Cursor = crCross
     Left = 0
     Height = 240
     Top = 0
@@ -18,9 +19,10 @@ object GLForm1: TGLForm1
     OpenGLMajorVersion = 3
     OpenGLMinorVersion = 3
     MultiSampling = 4
+    DepthBits = 32
     OnMouseDown = GLboxMouseDown
     OnMouseMove = GLboxMouseMove
     OnMouseUp = GLboxMouseUp
-    OnPaint = GLboxPaint
+    OnMouseWheel = GLboxMouseWheel
   end
 end

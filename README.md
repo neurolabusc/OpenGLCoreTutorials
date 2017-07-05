@@ -26,11 +26,18 @@ The project cubepro.lpr shows a colored 3D cube. You can drag the mouse to spin 
 
 ##### Project 3: Render
 
+The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-positions the fish, and using the scroll wheel adjusts the size of the fish.
+
+![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/render.jpg)
+
+##### Project 4: Textures
+
 The project render.lpr create volume renderings - by default it generates a 'borg' cube, but you can load any NIfTI format image, for example the brain image included with this project. This project is a simple extension of the cube project: note that the colors of the cube in the previous project map their XYZ position as red, green and blue. We can use these 3 dimensions to map the three dimensions of our 3D textures.
 
 Volume renderers are often [two pass, but can also be computed in a single pass](http://prideout.net/blog/?p=64). This project can be compiled for either mode, depending on whether the compiler directive '{$DEFINE TWO_PASS}' is enabled or not. There is no  meaningful performance difference between these two modes (the single pass eliminates a 2D texture lookup per ray, but for complex volumes we are computing hundreds of 3D texture lookups). However, the single pass method is simpler to implement as you do not need to manage a framebuffer for the cube's back face.
 
-![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/render.jpg)
+![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/textures.jpg)
+
 
 ##### Recent Versions
 
