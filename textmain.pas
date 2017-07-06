@@ -137,7 +137,7 @@ begin
   //gGLText.TextOut(gPositionX,gPositionY,gZoom, gStr);
   GLBox.OnPaint:= @GLboxPaint;
   gGLText2.TextColor(0,0,0);//black
-  gGLText2.TextOut(6,66,2, 'The five boxing wizards jump quickly.');
+  gGLText2.TextOut(6,66,2, 45, 'The five boxing wizards jump quickly.');
   gGLText2.TextOut(6,36,1, 'Pack my box with five dozen liquor jugs.');
   gGLText2.TextOut(6,16,0.5, 'Sphinx of black quartz, judge my vow.');
   UpdateText;

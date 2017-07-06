@@ -7,10 +7,10 @@ interface
 
 uses
   {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, {$ELSE}gl, glext, {$ENDIF}
-  Dialogs,Classes, SysUtils, Graphics, OpenGLContext;
+  Dialogs,Classes, SysUtils, Graphics, OpenGLContext, math;
 
 const
-    kMaxChar = 2048;
+    kMaxChar = 2048; //maximum number of characters on screen, if >21845 change TPoint3i to uint32 and set glDrawElements to GL_UNSIGNED_INT
 type
     TMetric = Packed Record //each vertex has position and texture coordinates
       x,y,xEnd,yEnd,w,h,xo,yo,xadv   : single; //position coordinates
@@ -22,6 +22,9 @@ type
     Txyuv = Packed Record //each vertex has position and texture coordinates
       x,y   : single; //position coordinates
       u,v : single; //texture coordinates
+    end;
+    TRotMat = Packed Record //https://en.wikipedia.org/wiki/Rotation_matrix
+            Xx,Xy, Yx,Yy: single;
     end;
     TQuad = array [0..3] of Txyuv; //each character rectangle has 4 vertices
   TGLText = class
@@ -37,13 +40,14 @@ type
     function LoadMetrics(fnm : string): boolean;
     function LoadTex(fnm : string): boolean;
     procedure UpdateVbo;
-    procedure CharOut(x,y,z: single; asci: byte);
+    procedure CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
   public
     procedure ClearText; //remove all previous drawn text
-    procedure TextOut(x,y,z: single; s: string); //add line of text
+    procedure TextOut(x,y,scale: single; s: string); overload; //add line of text
+    procedure TextOut(x,y,scale, angle: single; s: string); overload; //add line of text
     function BaseHeight: single;
     function LineHeight: single;
-    function TextWidth(z: single; s: string): single;
+    function TextWidth(scale: single; s: string): single;
     procedure TextColor(red,green,blue: byte);
     procedure DrawText; //must be called while TOpenGLControl is current context
     constructor Create(fnm : string; superSample: boolean; out success: boolean; Ctx: TOpenGLControl); //overlod;
@@ -244,22 +248,28 @@ begin
   result := true;
 end;
 
-procedure TGLText.CharOut(x,y,z: single; asci: byte);
+procedure Rot(xK,yK, x,y: single; r: TRotMat; out Xout, Yout: single);
+// rotate points x,y and add to constant offset xK,yK
+begin
+     Xout := xK + (x * r.Xx) + (y * r.Xy);
+     Yout := yK + (x * r.Yx) + (y * r.Yy);
+end;
+
+procedure TGLText.CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
 var
   q: TQuad;
+  x0,x1,y0,y1: single;
 begin
   if metrics.M[asci].w = 0 then exit; //nothing to draw, e.g. SPACE character
   if nChar > kMaxChar then nChar := 0; //overflow!
-  y := y + (z * metrics.M[asci].yo);
-  x := x + (z * metrics.M[asci].xo);
-  q[0].x := x;
-  q[1].x := q[0].x;
-  q[2].x := (z * metrics.M[asci].w) + x;
-  q[3].x := q[2].x;
-  q[0].y := y;
-  q[1].y := (z * metrics.M[asci].h) + y;
-  q[2].y := q[0].y;
-  q[3].y := q[1].y;
+  x0 := (scale * metrics.M[asci].xo);
+  x1 := x0 + (scale * metrics.M[asci].w);
+  y0 := (scale * metrics.M[asci].yo);
+  y1 := y0 + (scale * metrics.M[asci].h);
+  Rot(x,y, x0, y0, rx, q[0].x, q[0].y);
+  Rot(x,y, x0, y1, rx, q[1].x, q[1].y);
+  Rot(x,y, x1, y0, rx, q[2].x, q[2].y);
+  Rot(x,y, x1, y1, rx, q[3].x, q[3].y);
   q[0].u := metrics.M[asci].x;
   q[1].u := q[0].u;
   q[2].u := metrics.M[asci].xEnd;
@@ -273,18 +283,29 @@ begin
   nChar := nChar + 1;
 end; //CharOut()
 
-procedure TGLText.TextOut(x,y,z: single; s: string);
+procedure TGLText.TextOut(x,y,scale, angle: single; s: string); overload;
 var
   i: integer;
   asci: byte;
+  rx: TRotMat;
 begin
+  angle := DegToRad(angle);
+  rx.Xx := cos(angle);
+  rx.Xy := -sin(angle);
+  rx.Yx := sin(angle);
+  rx.Yy := cos(angle);
   if length(s) < 1 then exit;
   for i := 1 to length(s) do begin
       asci := ord(s[i]);
       if metrics.M[asci].xadv = 0 then continue; //not in dataset
-      CharOut(x,y,z,asci);
-      x := x + (z * metrics.M[asci].xadv);
+      CharOut(x,y,scale,rx,asci);
+      Rot(x,y, (scale * metrics.M[asci].xadv),0, rx, x, y);
   end;
+end; //TextOut()
+
+procedure TGLText.TextOut(x,y,scale: single; s: string); overload;
+begin
+     TextOut(x,y,scale,0,s);
 end; //TextOut()
 
 function TGLText.BaseHeight: single;
@@ -297,7 +318,7 @@ begin
      result := metrics.lineHeight;
 end;
 
-function TGLText.TextWidth(z: single; s: string): single;
+function TGLText.TextWidth(scale: single; s: string): single;
 var
   i: integer;
   asci: byte;
@@ -307,7 +328,7 @@ begin
   for i := 1 to length(s) do begin
       asci := ord(s[i]);
       if metrics.M[asci].xadv = 0 then continue; //not in dataset
-      result := result + (z * metrics.M[asci].xadv);
+      result := result + (scale * metrics.M[asci].xadv);
   end;
 end; //TextWidth()
 
@@ -370,7 +391,7 @@ end; //UpdateVbo()
 procedure TGLText.LoadBufferData;
 type
     TPoint3i = Packed Record
-      x,y,z   : uint32; //vertex indices
+      x,y,z   : uint16; //vertex indices: for >65535 indices use uint32 and use GL_UNSIGNED_INT for glDrawElements
     end;
 const
     kATTRIB_POINT = 0; //XY position on screen
@@ -599,7 +620,7 @@ begin
   glUniformMatrix4fv(uniform_mtx, 1, GL_FALSE, @mvp[0,0]);
   glBindVertexArray(vao);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vboIdx);
-  glDrawElements(GL_TRIANGLES,  nChar * 2* 3, GL_UNSIGNED_INT, nil); //each quad 2 triangles each with 3 indices
+  glDrawElements(GL_TRIANGLES,  nChar * 2* 3, GL_UNSIGNED_SHORT, nil); //each quad 2 triangles each with 3 indices
   glBindVertexArray(0);
   {$ELSE}
   glCallList(displayLst);

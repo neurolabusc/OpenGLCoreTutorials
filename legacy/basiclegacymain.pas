@@ -1,4 +1,4 @@
-unit textlegacymain;
+unit basiclegacymain;
 
 {$mode objfpc}{$H+}
 
@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
-  Dialogs, gl, glext, gltext_legacy,  Types;
+  Dialogs, gl, glext,  Types;
 
 type
 
@@ -24,7 +24,6 @@ type
     procedure GLBoxMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure GLboxPaint(Sender: TObject);
-    procedure UpdateText;
   private
 
   public
@@ -37,13 +36,9 @@ var
 implementation
 {$R *.lfm}
 var
-  gPositionX: single = 0;
-  gPositionY: single = 0;
   gZoom : single = 1;
+  gRotation : integer = 30;
   gMouseY : integer = -1;
-  gMouseX : integer = -1;
-  gGLText, gGLText2: TGLText;
-  gStr : string = 'The quick brown fox jumped over the lazy dog';
 
 
 procedure  InitGL(var GLcontrol: TOpenGLControl);
@@ -59,53 +54,26 @@ begin
 end;
 
 procedure TGLForm1.FormShow(Sender: TObject);
-var
-  success: boolean;
-  basenm, fnm: string;
 begin
      InitGL (GLBox);
-     basenm := extractfilepath(paramstr(0));
-     {$IFDEF DARWIN}
-     basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
-     {$ENDIF}
-     fnm := basenm + 'black.png'; //freeware icon from http://www.softicons.com/holidays-icons/scuba-diving-icons-by-diveandgo.com/fish-icon
-     gGLText := TGLText.Create(fnm, true, success, GLBox);
-     if not success then
-       showmessage('Error: unable to load .png and .fnt '+fnm);
-     fnm := basenm + 'arial.png';//'arial.png';//'serif.png';
-     gGLText2 := TGLText.Create(fnm, true, success, GLBox);
-     if not success then
-       showmessage('Error: unable to load .png and .fnt '+fnm);
-     gGLText2.TextColor(0,0,0);//black
-     gGLText2.TextOut(6,66,2,30, 'The five boxing wizards jump quickly.');
-     gGLText2.TextOut(6,36,1, 'Pack my box with five dozen liquor jugs.');
-     gGLText2.TextOut(6,16,0.5, 'Sphinx of black quartz, judge my vow.');
-     if GLErrorStr <> '' then begin
-        showmessage(GLErrorStr);
-        GLErrorStr := '';
-     end;
      GLBox.OnPaint:= @GLboxPaint;
-     UpdateText;
 end;
 
 procedure TGLForm1.GLBoxMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   gMouseY := Y;
-  gMouseX := X;
 end;
 
 procedure TGLForm1.GLBoxMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
   if gMouseY < 0 then exit; //mouse is not down
-  if (X <> gMouseX) or (Y <> gMouseY) then begin
-        gPositionX := gPositionX + (X - gMouseX);
-        gPositionY := gPositionY + (gMouseY - Y);
+  if (Y <> gMouseY) then begin
+        gRotation := gRotation + (Y - gMouseY);
+        GLBox.Invalidate;
   end;
   gMouseY := Y;
-  gMouseX := X;
-  UpdateText;
 end;
 
 procedure TGLForm1.GLBoxMouseUp(Sender: TObject; Button: TMouseButton;
@@ -123,27 +91,22 @@ begin
   else
      gZoom := gZoom - 0.1;
   if gZoom < 0.1 then gZoom := 0.1;
-  if gZoom > 10 then gZoom := 10;
-  UpdateText;
-end;
-
-procedure TGLForm1.UpdateText;
-begin
-     gGLText.ClearText;
-     gGLText.TextOut(gPositionX,gPositionY,gZoom, gStr);
-     GLBox.Invalidate;
+  if gZoom > 2 then gZoom := 2;
+  GLBox.Invalidate;
 end;
 
 procedure TGLForm1.GLboxPaint(Sender: TObject);
+var
+  aspect: single;
 begin
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  glOrtho (0, GLBox.ClientWidth, 0, GLBox.ClientHeight, 0.1, 40);
   glClearColor(0.3, 0.5, 0.8, 1.0); //Set blue background
   glClear(GL_COLOR_BUFFER_BIT);
   glEnable (GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  //draw triangle
+  //draw triangle - pixel coordinates
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho (0, GLBox.ClientWidth, 0, GLBox.ClientHeight, 0.1, 40);
   glBegin(GL_TRIANGLES);
     glColor3f(1, 0, 0);
     glVertex3f( GLBox.ClientWidth/2, GLBox.ClientHeight, -1);
@@ -152,9 +115,23 @@ begin
     glColor3f(0, 0, 1);
     glVertex3f( GLBox.ClientWidth,0, -1);
   glEnd;
-  //draw text
-  gGLText2.DrawText;
-  gGLText.DrawText;
+  //draw quad - cartesian coordinates with screen center at 0,0
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  aspect := GLBox.ClientWidth / GLBox.ClientHeight;
+  if (aspect > 1) then
+     glOrtho(-2.0 * aspect, 2.0 * aspect, -2.0, 2.0, 0.1, 100)
+   else
+     glOrtho(-2.0, 2.0, -2.0 / aspect, 2.0 / aspect, 0.1, 100);
+  glRotatef(gRotation,0,0,1);
+  glScalef(gZoom,gZoom,1);
+  glColor3f(1.0, 0.0, 0.0);
+  glBegin(GL_QUADS);
+    glVertex3f(-1, -1, -1);
+    glVertex3f(-1, 1, -1);
+    glVertex3f(1, 1, -1);
+    glVertex3f(1, -1, -1);
+  glEnd;
   //show result
   GLbox.SwapBuffers;
 end;

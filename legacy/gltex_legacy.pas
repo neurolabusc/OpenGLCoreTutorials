@@ -1,10 +1,10 @@
-unit gltex;
+unit gltex_legacy;
 //openGL texture
 
 {$mode objfpc}{$H+}
 
 interface
-{$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
+//{$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
 
 uses
   {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, {$ELSE}gl, glext, {$ENDIF}

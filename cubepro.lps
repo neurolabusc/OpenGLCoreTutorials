@@ -2,7 +2,6 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
     <Units Count="2">
       <Unit0>
         <Filename Value="cubepro.lpr"/>
@@ -16,17 +15,21 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="204"/>
-        <CursorPos X="20" Y="217"/>
+        <TopLine Value="203"/>
+        <CursorPos X="4" Y="213"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
-    <JumpHistory Count="1">
+    <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
         <Filename Value="cubemain.pas"/>
       </Position1>
+      <Position2>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="217" Column="20" TopLine="205"/>
+      </Position2>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

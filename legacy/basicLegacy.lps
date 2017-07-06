@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="basicLegacy.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="24"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="basiclegacymain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="120"/>
+        <CursorPos X="27" Y="127"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="textlegacymain.pas"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="135"/>
+        <CursorPos X="39" Y="153"/>
+        <UsageCount Value="23"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="gltext_legacy.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="3" Y="5"/>
+        <UsageCount Value="12"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="gl_legacy_utils.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="21"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="10" HistoryIndex="9">
+      <Position1>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="45" TopLine="31"/>
+      </Position1>
+      <Position2>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="62" TopLine="43"/>
+      </Position2>
+      <Position3>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="26" Column="43" TopLine="11"/>
+      </Position3>
+      <Position4>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="80" TopLine="70"/>
+      </Position4>
+      <Position5>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="100" TopLine="88"/>
+      </Position5>
+      <Position6>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="35" Column="39" TopLine="25"/>
+      </Position6>
+      <Position7>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="39" Column="3" TopLine="37"/>
+      </Position7>
+      <Position8>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="99" Column="18" TopLine="97"/>
+      </Position8>
+      <Position9>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="123" TopLine="109"/>
+      </Position9>
+      <Position10>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="126" TopLine="116"/>
+      </Position10>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

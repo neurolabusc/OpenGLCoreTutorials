@@ -1,4 +1,4 @@
-unit textlegacymain;
+unit texlegacymain;
 
 {$mode objfpc}{$H+}
 
@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
-  Dialogs, gl, glext, gltext_legacy,  Types;
+  Dialogs, gl, glext, gltex_legacy,  Types;
 
 type
 
@@ -24,7 +24,6 @@ type
     procedure GLBoxMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure GLboxPaint(Sender: TObject);
-    procedure UpdateText;
   private
 
   public
@@ -42,8 +41,8 @@ var
   gZoom : single = 1;
   gMouseY : integer = -1;
   gMouseX : integer = -1;
-  gGLText, gGLText2: TGLText;
-  gStr : string = 'The quick brown fox jumped over the lazy dog';
+  gGLTexBG, gGLTex: TGLTex;
+
 
 
 procedure  InitGL(var GLcontrol: TOpenGLControl);
@@ -60,32 +59,22 @@ end;
 
 procedure TGLForm1.FormShow(Sender: TObject);
 var
-  success: boolean;
-  basenm, fnm: string;
+  fnm, fishfnm, coralfnm: string;
 begin
-     InitGL (GLBox);
-     basenm := extractfilepath(paramstr(0));
-     {$IFDEF DARWIN}
-     basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
-     {$ENDIF}
-     fnm := basenm + 'black.png'; //freeware icon from http://www.softicons.com/holidays-icons/scuba-diving-icons-by-diveandgo.com/fish-icon
-     gGLText := TGLText.Create(fnm, true, success, GLBox);
-     if not success then
-       showmessage('Error: unable to load .png and .fnt '+fnm);
-     fnm := basenm + 'arial.png';//'arial.png';//'serif.png';
-     gGLText2 := TGLText.Create(fnm, true, success, GLBox);
-     if not success then
-       showmessage('Error: unable to load .png and .fnt '+fnm);
-     gGLText2.TextColor(0,0,0);//black
-     gGLText2.TextOut(6,66,2,30, 'The five boxing wizards jump quickly.');
-     gGLText2.TextOut(6,36,1, 'Pack my box with five dozen liquor jugs.');
-     gGLText2.TextOut(6,16,0.5, 'Sphinx of black quartz, judge my vow.');
-     if GLErrorStr <> '' then begin
-        showmessage(GLErrorStr);
-        GLErrorStr := '';
-     end;
-     GLBox.OnPaint:= @GLboxPaint;
-     UpdateText;
+  fnm := extractfilepath(paramstr(0));
+  {$IFDEF DARWIN}
+  fnm := extractfilepath(ExcludeTrailingPathDelimiter(fnm))+'Resources/';
+  {$ENDIF}
+  fishfnm := fnm + 'fish.png'; //freeware icon from http://www.softicons.com/holidays-icons/scuba-diving-icons-by-diveandgo.com/fish-icon
+  if not fileexists(fishfnm) then
+    showmessage('Error: did not find image '+fishfnm);
+  coralfnm := fnm + 'coral.png'; //freeware icon from http://www.softicons.com/holidays-icons/scuba-diving-icons-by-diveandgo.com/fish-icon
+  if not fileexists(coralfnm) then
+    showmessage('Error: did not find image '+coralfnm);
+  InitGL (GLBox);
+  gGLTexBG := TGLTex.Create(coralfnm, GLBox);
+  gGLTex := TGLTex.Create(fishfnm, GLBox);
+  GLBox.OnPaint:= @GLboxPaint;
 end;
 
 procedure TGLForm1.GLBoxMouseDown(Sender: TObject; Button: TMouseButton;
@@ -102,10 +91,11 @@ begin
   if (X <> gMouseX) or (Y <> gMouseY) then begin
         gPositionX := gPositionX + (X - gMouseX);
         gPositionY := gPositionY + (gMouseY - Y);
+        gGLTex.updateVbo(gPositionX,gPositionY,gZoom, GLBox);
   end;
   gMouseY := Y;
   gMouseX := X;
-  UpdateText;
+  GLBox.Invalidate;
 end;
 
 procedure TGLForm1.GLBoxMouseUp(Sender: TObject; Button: TMouseButton;
@@ -124,14 +114,10 @@ begin
      gZoom := gZoom - 0.1;
   if gZoom < 0.1 then gZoom := 0.1;
   if gZoom > 10 then gZoom := 10;
-  UpdateText;
-end;
-
-procedure TGLForm1.UpdateText;
-begin
-     gGLText.ClearText;
-     gGLText.TextOut(gPositionX,gPositionY,gZoom, gStr);
-     GLBox.Invalidate;
+  //GLBox.MakeCurrent(false);
+  gGLTex.updateVbo(gPositionX,gPositionY,gZoom, GLBox);
+  //GLBox.ReleaseContext;
+  GLBox.Invalidate;
 end;
 
 procedure TGLForm1.GLboxPaint(Sender: TObject);
@@ -152,9 +138,9 @@ begin
     glColor3f(0, 0, 1);
     glVertex3f( GLBox.ClientWidth,0, -1);
   glEnd;
-  //draw text
-  gGLText2.DrawText;
-  gGLText.DrawText;
+  //draw textures
+  gGLTexBG.DrawTex;
+  gGLTex.DrawTex;
   //show result
   GLbox.SwapBuffers;
 end;

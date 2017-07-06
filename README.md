@@ -14,7 +14,7 @@ The three sample applications should compile easily (assuming you are using Laza
 
 ##### Project 1: Basic
 
-The project basic.lpr shows a 2D square. It is a Pascal port of a minimal [C project](https://github.com/skeeto/opengl-demo). You can drag the mouse to spin the square. Since Core OpenGL does not support GL_QUADS, we draw the square using a [GL_TRIANGLE_STRIP](http://stackoverflow.com/questions/16882474/is-there-a-clear-performance-difference-between-gl-quads-and-gl-triangle-strip).
+The project basic.lpr shows a 2D square. It is a Pascal port of a minimal [C project](https://github.com/skeeto/opengl-demo). You can drag the mouse to spin the square. Since Core OpenGL does not support GL_QUADS, we draw the square using a [GL_TRIANGLE_STRIP](http://stackoverflow.com/questions/16882474/is-there-a-clear-performance-difference-between-gl-quads-and-gl-triangle-strip). This project was also ported to legacy OpenGL 2.1 (basicLegacy project).
 
 ![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/basic.jpg)
 
@@ -35,7 +35,7 @@ Volume renderers are often [two pass, but can also be computed in a single pass]
 
 ##### Project 4: Textures
 
-The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-positions the fish, and using the scroll wheel adjusts the size of the fish.
+The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-positions the fish, and using the scroll wheel adjusts the size of the fish. This project was also ported to legacy OpenGL 2.1 (texLegacy project).
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/textures.jpg" width="271">
 
@@ -43,7 +43,7 @@ The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-p
 
 The project text.lpr draws text on the screen. Since OpenGL is specialized for drawing triangles, it is surprisingly hard to create nice text (which tends to exhibit smooth curves). This project uses [distance field fonts](http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf) using the technique described [here](https://github.com/libgdx/libgdx/wiki/Distance-field-fonts). The project reads [Hiero](https://github.com/libgdx/libgdx/wiki/Hiero) format fnt/png files, so you can create your own fonts if you wish. By default, the shaders use [supersampling](http://www.java-gaming.org/index.php?topic=33612.0) to enhance the quality. For a related WebGL-based implementation [click here](https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817). As a bonus, an analogous project textLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
 
-<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/font.png" width="421">
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/font.png" width="285">
 
 ##### Recent Versions
 

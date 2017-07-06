@@ -2,7 +2,6 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
     <Units Count="16">
       <Unit0>
         <Filename Value="tex.lpr"/>
