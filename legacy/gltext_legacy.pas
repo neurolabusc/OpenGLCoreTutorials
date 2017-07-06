@@ -463,17 +463,10 @@ begin
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-   {$IFDEF Darwin}
   if px.Bitmap.PixelFormat = pf32bit then
      bmpformat := GL_BGRA
   else
       bmpformat := GL_BGR;
-  {$ELSE}
-  if px.Bitmap.PixelFormat = pf32bit then
-     bmpformat := GL_RGBA
-  else
-      bmpformat := GL_RGB;
-  {$ENDIF}
   glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, bmpformat, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
   px.Free;
   result := true;

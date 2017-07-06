@@ -10,7 +10,6 @@ object GLForm1: TGLForm1
   Position = poScreenCenter
   LCLVersion = '1.9.0.0'
   object GLbox: TOpenGLControl
-    Cursor = crCross
     Left = 0
     Height = 229
     Top = 0
@@ -20,7 +19,6 @@ object GLForm1: TGLForm1
     OpenGLMajorVersion = 3
     OpenGLMinorVersion = 3
     MultiSampling = 4
-    DepthBits = 32
     OnMouseDown = GLboxMouseDown
     OnMouseMove = GLboxMouseMove
     OnMouseUp = GLboxMouseUp
