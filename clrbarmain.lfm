@@ -1,20 +1,20 @@
 object GLForm1: TGLForm1
   Left = 534
-  Height = 440
+  Height = 600
   Top = 132
-  Width = 506
+  Width = 600
   Caption = 'GLForm1'
-  ClientHeight = 440
-  ClientWidth = 506
+  ClientHeight = 600
+  ClientWidth = 600
   Menu = MainMenu1
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '1.9.0.0'
   object GLbox: TOpenGLControl
     Left = 0
-    Height = 440
+    Height = 600
     Top = 0
-    Width = 506
+    Width = 600
     Align = alClient
     AutoResizeViewport = True
     OpenGLMajorVersion = 3

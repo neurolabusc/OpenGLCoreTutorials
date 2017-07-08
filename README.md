@@ -46,11 +46,11 @@ The project text.lpr draws text on the screen. Since OpenGL is specialized for d
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/font.png" width="285">
 
-##### Project 5: Color Intensity Scales
+##### Project 6: Color Intensity Scales
 
 The project clrbar.lpr generates color bars with text legends. It builds off of the text project. Like the text project, static features are rapidly drawn using a vertex buffer (or a display list if you use legacy OpenGL) rather than being regenerated. As a bonus, an analogous project clrbarLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
 
-<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/clrbar.png" width="305">
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/clrbar.png" width="295">
 
 ##### Recent Versions
 
