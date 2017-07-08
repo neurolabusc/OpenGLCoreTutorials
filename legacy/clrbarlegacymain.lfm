@@ -1,0 +1,78 @@
+object GLForm1: TGLForm1
+  Left = 566
+  Height = 574
+  Top = 165
+  Width = 632
+  Caption = 'GLForm1'
+  ClientHeight = 574
+  ClientWidth = 632
+  Menu = MainMenu1
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object GLBox: TOpenGLControl
+    Left = 0
+    Height = 574
+    Top = 0
+    Width = 632
+    Align = alClient
+    AutoResizeViewport = True
+    OpenGLMajorVersion = 2
+    OpenGLMinorVersion = 1
+    MultiSampling = 4
+    OnMouseDown = GLBoxMouseDown
+    OnMouseMove = GLBoxMouseMove
+    OnMouseUp = GLBoxMouseUp
+    OnMouseWheel = GLBoxMouseWheel
+  end
+  object MainMenu1: TMainMenu
+    left = 66
+    top = 18
+    object MenuItem1: TMenuItem
+      Caption = 'View'
+      object MenuItem2: TMenuItem
+        Caption = 'Colorbar'
+        object ClrbarOffMenu: TMenuItem
+          AutoCheck = True
+          Caption = 'Off'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = ClrMenu
+        end
+        object WhiteMenu: TMenuItem
+          Tag = 1
+          AutoCheck = True
+          Caption = 'White'
+          Checked = True
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = ClrMenu
+        end
+        object TranslucentWhiteMenu: TMenuItem
+          Tag = 2
+          AutoCheck = True
+          Caption = 'Translucent White'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = ClrMenu
+        end
+        object BlackMenu: TMenuItem
+          Tag = 3
+          AutoCheck = True
+          Caption = 'Black'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = ClrMenu
+        end
+        object TranslucentBlackMenu: TMenuItem
+          Tag = 4
+          AutoCheck = True
+          Caption = 'Translucent Black'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = ClrMenu
+        end
+      end
+    end
+  end
+end

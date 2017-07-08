@@ -15,14 +15,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="203"/>
-        <CursorPos X="4" Y="213"/>
+        <TopLine Value="127"/>
+        <CursorPos X="22" Y="140"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="12" HistoryIndex="11">
       <Position1>
         <Filename Value="cubemain.pas"/>
       </Position1>
@@ -30,6 +30,46 @@
         <Filename Value="cubemain.pas"/>
         <Caret Line="217" Column="20" TopLine="205"/>
       </Position2>
+      <Position3>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="49" Column="11" TopLine="31"/>
+      </Position3>
+      <Position4>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="191" Column="31" TopLine="175"/>
+      </Position4>
+      <Position5>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="143" Column="11" TopLine="125"/>
+      </Position5>
+      <Position6>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="8" Column="28"/>
+      </Position6>
+      <Position7>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="45" Column="17" TopLine="34"/>
+      </Position7>
+      <Position8>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="139" Column="22" TopLine="129"/>
+      </Position8>
+      <Position9>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="7" Column="18"/>
+      </Position9>
+      <Position10>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="40" Column="7" TopLine="24"/>
+      </Position10>
+      <Position11>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="123" Column="21" TopLine="107"/>
+      </Position11>
+      <Position12>
+        <Filename Value="cubemain.pas"/>
+        <Caret Line="141" Column="27" TopLine="131"/>
+      </Position12>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

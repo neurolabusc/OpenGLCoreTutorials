@@ -205,6 +205,7 @@ begin
   gGLText2.DrawText;
   gGLText.DrawText;
   GLbox.SwapBuffers;
+  //caption := inttostr(gGLText.Crap);
 end;
 
 end.

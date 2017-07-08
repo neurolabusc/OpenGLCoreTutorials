@@ -3,8 +3,9 @@ unit cubemain;
 {$mode objfpc}{$H+}
 
 interface
-
+{$DEFINE cubeObject} //optional: demonstrate glcube class
 uses
+  {$IFDEF cubeObject}glcube,{$ENDIF}
   gl_core_matrix, gl_core_utils, Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
   Dialogs, StdCtrls, ExtCtrls, glcorearb, Types;
 
@@ -46,6 +47,7 @@ const
 var
   gPrefs: TPrefs;
   gMouse : TPoint;
+  {$IFDEF cubeObject}gCube : TGLCube;{$ENDIF}
 
 procedure LoadBufferData (var vao: gluint);
 var
@@ -133,6 +135,12 @@ begin
   glBindVertexArray(0);
   glDisable(GL_CULL_FACE);
   glUseProgram(0);
+    {$IFDEF cubeObject}
+  gCube.Size := 0.05;//gZoom/(max(GLBox.ClientWidth,GLBox.ClientHeight));
+  gCube.Azimuth:=360-gPrefs.Azimuth;
+  gCube.Elevation:=gPrefs.Elevation;
+  gCube.Draw(GLBox.ClientWidth,GLBox.ClientHeight);
+  {$ENDIF}
   GLbox.SwapBuffers;
 end;
 
@@ -214,6 +222,8 @@ begin
   {$ENDIF}
   GLBox.MakeCurrent();
   InitGL;
+  {$IFDEF cubeObject}gCube := TGLCube.Create(GLBox);{$ENDIF}
+  GLBox.ReleaseContext;
   GLBox.invalidate;
 end;
 

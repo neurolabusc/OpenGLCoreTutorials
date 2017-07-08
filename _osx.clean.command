@@ -5,6 +5,7 @@ here="`dirname \"$0\"`"
 cd "$here" || exit 1
 
 rm basic
+rm clrbar
 rm cubepro
 rm render
 rm tex
@@ -13,6 +14,7 @@ rm text
 
 #remove Cocoa as widgetset
 sed -i.bak '/BuildModes Active="MacOS"/d' ./basic.lps
+sed -i.bak '/BuildModes Active="MacOS"/d' ./clrbar.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./cubepro.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./render.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./tex.lps
@@ -30,11 +32,14 @@ rm -rf backup
 cd legacy
 
 rm basicLegacy
+rm clrbarLegacy
+rm cubeLegacy
 rm texLegacy
 rm textLegacy
-rm cubeLegacy
+
 
 sed -i.bak '/BuildModes Active="MacOS"/d' ./basicLegacy.lps
+sed -i.bak '/BuildModes Active="MacOS"/d' ./clrbarLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./cubeLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./texLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./textLegacy.lps

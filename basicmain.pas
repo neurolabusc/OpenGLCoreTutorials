@@ -58,7 +58,7 @@ const
     kFrag = '#version 330'
 +#10'out vec4 color;'
 +#10'void main() {'
-+#10'    color = vec4(1, 0.15, 0.15, 0);'
++#10'    color = vec4(1, 0.15, 0.15, 1);'
 +#10'}';
 
 procedure LoadBufferData;

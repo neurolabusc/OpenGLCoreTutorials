@@ -20,7 +20,7 @@ The project basic.lpr shows a 2D square. It is a Pascal port of a minimal [C pro
 
 ##### Project 2: Cube
 
-The project cubepro.lpr shows a colored 3D cube. You can drag the mouse to spin the cube. Since Core OpenGL does not support GL_MODELVIEW and GL_PROJECTIONVIEW, this project uses equivalent functions (nGL_MODELVIEW and nGL_PROJECTIONVIEW) from the unit gl_core_utils.
+The project cubepro.lpr shows a colored 3D cube. You can drag the mouse to spin the cube. Since Core OpenGL does not support GL_MODELVIEW and GL_PROJECTIONVIEW, this project uses equivalent functions (nGL_MODELVIEW and nGL_PROJECTIONVIEW) from the unit gl_core_utils. This project was also ported to legacy OpenGL 2.1 (cubeLegacy project).
 
 ![alt tag](https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/cube.jpg)
 
@@ -30,6 +30,7 @@ The project render.lpr create volume renderings - by default it generates a 'bor
 
 Volume renderers are often [two pass, but can also be computed in a single pass](http://prideout.net/blog/?p=64). This project can be compiled for either mode, depending on whether the compiler directive '{$DEFINE TWO_PASS}' is enabled or not. There is no  meaningful performance difference between these two modes (the single pass eliminates a 2D texture lookup per ray, but for complex volumes we are computing hundreds of 3D texture lookups). However, the single pass method is simpler to implement as you do not need to manage a framebuffer for the cube's back face.
 
+I have a similar Lazarus project that uses [legacy OpenGL 2.1](https://github.com/neurolabusc/vx) instead of OpenGL Core 3.3.
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/render.jpg" width="271">
 
@@ -45,8 +46,15 @@ The project text.lpr draws text on the screen. Since OpenGL is specialized for d
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/font.png" width="285">
 
+##### Project 5: Color Intensity Scales
+
+The project clrbar.lpr generates color bars with text legends. It builds off of the text project. Like the text project, static features are rapidly drawn using a vertex buffer (or a display list if you use legacy OpenGL) rather than being regenerated. As a bonus, an analogous project clrbarLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
+
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/clrbar.png" width="305">
+
 ##### Recent Versions
 
+ - 7/2017 Text and texture projects, ports to legacy OpenGL
  - 1/2017 Initial release
 
 ##### License

@@ -7,7 +7,7 @@ interface
 
 uses
   {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, {$ELSE}gl, glext, {$ENDIF}
-  Dialogs,Classes, SysUtils, Graphics, OpenGLContext, math;
+  LResources, Dialogs,Classes, SysUtils, Graphics, OpenGLContext, math;
 
 const
     kMaxChar = 2048; //maximum number of characters on screen, if >21845 change TPoint3i to uint32 and set glDrawElements to GL_UNSIGNED_INT
@@ -31,7 +31,7 @@ type
   private
          {$IFDEF COREGL}vboVtx, vboIdx, vao,{$ELSE}displayLst,{$ENDIF} tex, shaderProgram: GLuint;
          {$IFDEF COREGL}uniform_mtx, {$ENDIF} uniform_clr, uniform_tex: GLint;
-         nChar, bmpHt, bmpWid: integer;
+         fCrap, nChar, bmpHt, bmpWid: integer;
          isChanged: boolean;
          quads: array[0..(kMaxChar-1)] of TQuad;
          metrics: TMetrics;
@@ -42,6 +42,7 @@ type
     procedure UpdateVbo;
     procedure CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
   public
+    property Crap : integer read fCrap;
     procedure ClearText; //remove all previous drawn text
     procedure TextOut(x,y,scale: single; s: string); overload; //add line of text
     procedure TextOut(x,y,scale, angle: single; s: string); overload; //add line of text
@@ -57,6 +58,10 @@ type
 
 implementation
 
+{$DEFINE TEX8BIT_NOT32} //we can save textures as 8-bit instead of 32-bit RGBA since we only need alpha
+{$IFNDEF TEX8BIT_NOT32}
+  Change ").r" to read ").r" in kFrag and kFragSuper
+{$ENDIF}
 
 const
 {$IFDEF COREGL}
@@ -81,10 +86,10 @@ kFragSuper = '#version 330'
 +#10'  return smoothstep(0.5 - w, 0.5 + w, d);'
 +#10'}'
 +#10'float samp(in vec2 uv, float w) {'
-+#10'  return contour(texture(tex, uv).a, w);'
++#10'  return contour(texture(tex, uv).r, w);'
 +#10'}'
 +#10'void main() {'
-+#10'  float dist = texture(tex,uv).a;'
++#10'  float dist = texture(tex,uv).r;'
 +#10'  float width = fwidth(dist);'
 +#10'  float alpha = contour( dist, width );'
 +#10'  float dscale = 0.354;'
@@ -101,7 +106,7 @@ kFrag = '#version 330'
 +#10'uniform vec4 clr;'
 +#10'const float smoothing = 1.0/16.0;'
 +#10'void main() {'
-+#10'  float dist = texture(tex,uv).a;'
++#10'  float dist = texture(tex,uv).r;'
 +#10'  float alpha = smoothstep(0.5 - smoothing, 0.5 + smoothing, dist);'
 +#10'  color = vec4(clr.r,clr.g,clr.b,alpha);'
 +#10'}';
@@ -117,7 +122,7 @@ const kFrag = 'varying vec4 vClr;'
 +#10'uniform vec4 clr;'
 +#10'const float smoothing = 1.0/16.0;'
 +#10'void main() {'
-+#10'  float dist = texture2D(tex,vClr.xy).a;'
++#10'  float dist = texture2D(tex,vClr.xy).r;'
 +#10'  float alpha = smoothstep(0.5 - smoothing, 0.5 + smoothing, dist);'
 +#10'  gl_FragColor = vec4(clr.rgb,alpha);'
 +#10'}';
@@ -129,12 +134,12 @@ const kFragSuper = 'varying vec4 vClr;'
 +#10'  return smoothstep(0.5 - w, 0.5 + w, d);'
 +#10'}'
 +#10'float samp(in vec2 uv, float w) {'
-+#10'  return contour(texture2D(tex, uv).a, w);'
++#10'  return contour(texture2D(tex, uv).r, w);'
 +#10'}'
 +#10'const float smoothing = 1.0/16.0;'
 +#10'void main() {'
 +#10'  vec2 uv = vClr.xy;'
-+#10'  float dist = texture2D(tex,uv).a;'
++#10'  float dist = texture2D(tex,uv).r;'
 +#10'  float width = fwidth(dist);'
 +#10'  float alpha = contour( dist, width );'
 +#10'  float dscale = 0.354;'
@@ -174,7 +179,7 @@ begin
 end;
 {$ENDIF} // BINARYMETRICS
 
-function LoadMetricsAsci(fnm: string; out fnt: TMetrics): boolean;
+(*function LoadMetricsAsci(fnm: string; out fnt: TMetrics): boolean;
 var
    f: TextFile;
    strlst : TStringList;
@@ -237,6 +242,87 @@ begin
         fnt.M[id].xadv:=GetFntVal('xadvance');
   end;
   CloseFile(f);
+  if (fnt.scaleW < 1) or (fnt.scaleH < 1) then exit;
+  for id := 0 to 255 do begin //normalize from pixels to 0..1
+      fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo);
+      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW;
+      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH;
+      fnt.M[id].xEnd := fnt.M[id].x + (fnt.M[id].w/fnt.scaleW);
+      fnt.M[id].yEnd := fnt.M[id].y + (fnt.M[id].h/fnt.scaleH);
+  end;
+  result := true;
+end;*)
+function LoadMetricsAsci(fnm: string; out fnt: TMetrics): boolean;
+var
+   flst, strlst : TStringList;
+   r: TLResource;
+   s: string;
+   fLine,id, pages: integer;
+function GetFntVal(key: string): single;
+var
+   i,p: integer;
+begin
+  result := 0;
+  for i := 1 to (strlst.Count-1) do begin
+        if pos(key,strlst[i]) <> 1 then continue;
+        p :=  length(key)+2;
+        result := strtofloatdef(copy(strlst[i],p,length(strlst[i])-p+1 ),0);
+        break;
+  end;
+end;
+begin
+  result := false;
+  for id := 0 to 255 do begin
+      fnt.M[id].x := 0;
+      fnt.M[id].y := 0;
+      fnt.M[id].xEnd := 0;
+      fnt.M[id].yEnd := 0;
+      fnt.M[id].w := 0;
+      fnt.M[id].h := 0;
+      fnt.M[id].xo := 0;
+      fnt.M[id].yo := 0;
+      fnt.M[id].xadv := 0; //critical to set: fnt format omits non-graphical characters (e.g. DEL): we skip characters whete X-advance = 0
+  end;
+  fLst := TStringList.Create;
+  if fnm = '' then begin
+    r:=LazarusResources.Find('fnt');
+    if r=nil then raise Exception.Create('resource fnt is missing');
+    fLst.StrictDelimiter := true;
+    fLst.Delimiter := chr(10);
+    fLst.DelimitedText:=r.Value;
+  end else
+      fLst.LoadFromFile(fnm);
+  if fLst.Count < 2 then exit;
+
+  strlst:=TStringList.Create;
+  for fLine := 0 to fLst.Count-1 do begin
+        s := fLst[fLine]; //make sure to run CheckMesh after this, as these are indexed from 1!
+        if (length(s) < 1) or (s[1] = '#') then continue;
+        strlst.DelimitedText := s;
+        if strlst.Count < 7 then continue;
+        if (strlst[0] = 'common') then begin
+           fnt.lineHeight := GetFntVal('lineHeight');
+           fnt.base := GetFntVal('base');
+           fnt.scaleW := GetFntVal('scaleW');
+           fnt.scaleH := GetFntVal('scaleH');
+           pages := round(GetFntVal('pages'));
+           if (pages <> 1) then begin
+              showmessage('Only able to read single page fonts');
+              exit;
+           end;
+        end;
+        if (strlst[0] <> 'char') then continue;
+        id := round(GetFntVal('id'));
+        if (id < 0) or (id > 255) then continue;
+        fnt.M[id].x:=GetFntVal('x');
+        fnt.M[id].y:=GetFntVal('y');
+        fnt.M[id].w:=GetFntVal('width');
+        fnt.M[id].h:=GetFntVal('height');
+        fnt.M[id].xo:=GetFntVal('xoffset');
+        fnt.M[id].yo:=GetFntVal('yoffset');
+        fnt.M[id].xadv:=GetFntVal('xadvance');
+  end;
+  fLst.free;
   if (fnt.scaleW < 1) or (fnt.scaleH < 1) then exit;
   for id := 0 to 255 do begin //normalize from pixels to 0..1
       fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo);
@@ -348,6 +434,7 @@ end; //ClearText()
 procedure TGLText.UpdateVbo;
 begin
   if (nChar < 1) or (not isChanged) then exit;
+  fCrap:= random(888);
   glBindBuffer(GL_ARRAY_BUFFER, vboVtx);
   glBufferSubData(GL_ARRAY_BUFFER,0,nChar * sizeof(TQuad),@quads[0]);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -437,17 +524,24 @@ end;
 function TGLText.LoadTex(fnm: string): boolean;
 var
   px: TPicture;
-  bmpformat: GLint;
+  {$IFDEF TEX8BIT_NOT32} //save 75% of texture size by only saving A not RGBA
+  ra: array of byte;
+  x,y,i: integer;
+  Ptr: PByte;
+  {$ENDIF}
 begin
   result := false;
-  if not fileexists(fnm) then begin
+  if (fnm <> '') and (not fileexists(fnm)) then begin
      fnm := changefileext(fnm,'.png');
      if not fileexists(fnm) then
         exit;
   end;
   px := TPicture.Create;
   try
-     px.LoadFromFile(fnm);
+    if fnm = '' then
+       px.LoadFromLazarusResource('png')
+    else
+        px.LoadFromFile(fnm);
   except
     px.Bitmap.Width:=0;
   end;
@@ -463,11 +557,25 @@ begin
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-  if px.Bitmap.PixelFormat = pf32bit then
-     bmpformat := GL_BGRA
-  else
-      bmpformat := GL_BGR;
-  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, bmpformat, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
+  if px.Bitmap.PixelFormat <> pf32bit then
+     exit; //distance stored in ALPHA field
+  {$IFDEF TEX8BIT_NOT32}
+  setlength(ra, px.Width * px.Height);
+  i := 0;
+  for y:= 1 to px.Height do begin
+      Ptr := px.Bitmap.RawImage.GetLineStart(y);
+      Inc(PByte(Ptr), 3);
+      for x := 1 to px.Width do begin
+          ra[i] := Ptr^;
+          Inc(PByte(Ptr), 4);
+          i := i + 1;
+      end;
+  end;
+  glTexImage2D(GL_TEXTURE_2D, 0,GL_RED, px.Width, px.Height, 0, GL_RED, GL_UNSIGNED_BYTE, @ra[0]);
+  setlength(ra,0);
+  {$ELSE}
+  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, GL_BGRA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
+  {$ENDIF}
   px.Free;
   result := true;
 end;
@@ -477,7 +585,10 @@ var
    fntfnm: string;
 begin
      {$IFDEF BINARYMETRICS}if LoadMetricsBinary(fnm,metrics) then exit;{$ENDIF}
-     fntfnm := changefileext(fnm,'.fnt');
+     if fnm = '' then
+        fntfnm := ''
+     else
+        fntfnm := changefileext(fnm,'.fnt');
      result := LoadMetricsAsci(fntfnm,metrics);
      {$IFDEF BINARYMETRICS}SaveMetricsBinary(fntfnm,metrics);{$ENDIF}
 end;
@@ -627,5 +738,7 @@ begin
   inherited;
 end;
 
+initialization
+ {$I fnt.lrs}
 end.
 

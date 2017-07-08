@@ -1,12 +1,13 @@
 unit cubelegacymain;
 
 {$mode objfpc}{$H+}
-
+{$DEFINE cubeObject} //optional: demonstrate glcube class
 interface
 
 uses
-  Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
-  Dialogs, gl, glext,  Types;
+    {$IFDEF cubeObject}glcube_legacy,{$ENDIF}
+    Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
+  Dialogs, gl, glext,  Types, math;
 
 type
 
@@ -41,6 +42,7 @@ var
   gAzimuth : integer = 30;
   gMouseX : integer = -1;
   gMouseY : integer = -1;
+  {$IFDEF cubeObject}gCube : TGLCube;{$ENDIF}
 
 
 procedure  InitGL(var GLcontrol: TOpenGLControl);
@@ -52,6 +54,7 @@ begin
      showmessage('Unable to load OpenGL 2.1');
      halt();
   end;
+  {$IFDEF cubeObject}gCube := TGLCube.Create(GLcontrol);{$ENDIF}
   GLcontrol.ReleaseContext;
 end;
 
@@ -102,52 +105,66 @@ end;
 
 procedure MakeCube(sz: single);
 //draw a cube of size sz
-var
-  sz2: single;
 begin
-  sz2 := sz;
-  glColor4f(0.1,0.1,0.1,1);
   glBegin(GL_TRIANGlE_STRIP); //* Bottom side
-	glVertex3f(-sz, -sz, -sz2);
-	glVertex3f(-sz, sz, -sz2);
-	glVertex3f(sz, -sz, -sz2);
-        glVertex3f(sz, sz, -sz2);
+        glColor4f(0,0,0,1);
+	glVertex3f(-sz, -sz, -sz);
+        glColor4f(0,1,0,1);
+	glVertex3f(-sz, sz, -sz);
+        glColor4f(1,0,0,1);
+	glVertex3f(sz, -sz, -sz);
+        glColor4f(1,1,0,1);
+        glVertex3f(sz, sz, -sz);
   glEnd;
-  glColor4f(0.8,0.8,0.8,1);
   glBegin(GL_TRIANGlE_STRIP); //* Top side
-	glVertex3f(-sz, -sz, sz2);
-	glVertex3f(sz, -sz, sz2);
-        glVertex3f(-sz, sz, sz2);
-        glVertex3f(sz, sz, sz2);
+        glColor4f(0,0,1,1);
+	glVertex3f(-sz, -sz, sz);
+        glColor4f(1,0,1,1);
+	glVertex3f(sz, -sz, sz);
+        glColor4f(0,1,1,1);
+        glVertex3f(-sz, sz, sz);
+        glColor4f(1,1,1,1);
+        glVertex3f(sz, sz, sz);
   glEnd;
-  glColor4f(0,0,0.5,1);
   glBegin(GL_TRIANGlE_STRIP); //* Front side
-    glVertex3f(-sz, sz2, -sz);
-    glVertex3f(-sz, sz2, sz);
-    glVertex3f(sz, sz2, -sz);
-    glVertex3f(sz, sz2, sz);
+    glColor4f(0,1,0,1);
+    glVertex3f(-sz, sz, -sz);
+    glColor4f(0,1,1,1);
+    glVertex3f(-sz, sz, sz);
+    glColor4f(1,1,0,1);
+    glVertex3f(sz, sz, -sz);
+    glColor4f(1,1,1,1);
+    glVertex3f(sz, sz, sz);
   glEnd;
-  glColor4f(0.3,0,0.3,1);
   glBegin(GL_TRIANGlE_STRIP);//* Back side
-	glVertex3f(-sz, -sz2, -sz);
-	glVertex3f(sz, -sz2, -sz);
-	glVertex3f(-sz, -sz2, sz);
-	glVertex3f(sz, -sz2, sz);
+        glColor4f(0,0,0,1);
+	glVertex3f(-sz, -sz, -sz);
+        glColor4f(1,0,0,1);
+	glVertex3f(sz, -sz, -sz);
+        glColor4f(0,0,1,1);
+	glVertex3f(-sz, -sz, sz);
+        glColor4f(1,0,1,1);
+	glVertex3f(sz, -sz, sz);
   glEnd;
-  glColor4f(0.6,0,0,1);
   glBegin(GL_TRIANGlE_STRIP); //* Left side
-	glVertex3f(-sz2, -sz, -sz);
-	glVertex3f(-sz2, -sz, sz);
-	glVertex3f(-sz2, sz, -sz);
-	glVertex3f(-sz2, sz, sz);
+	glColor4f(0,0,0,1);
+        glVertex3f(-sz, -sz, -sz);
+	glColor4f(0,0,1,1);
+        glVertex3f(-sz, -sz, sz);
+	glColor4f(0,1,0,1);
+        glVertex3f(-sz, sz, -sz);
+	glColor4f(0,1,1,1);
+        glVertex3f(-sz, sz, sz);
   glEnd;
-  glColor4f(0,0.6,0,1);
   glBegin(GL_TRIANGlE_STRIP); //* Right side
-	//glNormal3f(1.0, -sz, -sz);
-	glVertex3f(sz2, -sz, -sz);
-	glVertex3f(sz2, sz, -sz);
-	glVertex3f(sz2, -sz, sz);
-	glVertex3f(sz2, sz, sz);
+	glColor4f(1,0,0,1);
+	glVertex3f(sz, -sz, -sz);
+        glColor4f(1,1,0,1);
+	glVertex3f(sz, sz, -sz);
+        glColor4f(1,0,1,1);
+	glVertex3f(sz, -sz, sz);
+        glColor4f(1,1,1,1);
+	glVertex3f(sz, sz, sz);
   glEnd();
 end; //MakeCube()
 
@@ -162,42 +179,19 @@ begin
   glOrtho(0, GLBox.ClientWidth, 0, GLBox.ClientHeight,-gZoom*4,0.01);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity;
-  //glEnable(GL_DEPTH_TEST);
   glEnable(GL_CULL_FACE); //check on pyramid
-
   glTranslatef(0,0,gZoom*2);
   glTranslatef(GLBox.ClientWidth/2,GLBox.ClientHeight/2,0);
   glRotatef(90-gElevation,-1,0,0);
   glRotatef(-gAzimuth,0,0,1);
   MakeCube(gZoom);
-
-  //draw triangle - pixel coordinates
-  (*glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  glOrtho (0, GLBox.ClientWidth, 0, GLBox.ClientHeight, 0.1, 40);
-  glBegin(GL_TRIANGLES);
-    glColor3f(1, 0, 0);
-    glVertex3f( GLBox.ClientWidth/2, GLBox.ClientHeight, -1);
-    glColor3f(0, 1, 0);
-    glVertex3f(0,0, -1);
-    glColor3f(0, 0, 1);
-    glVertex3f( GLBox.ClientWidth,0, -1);
-  glEnd;  *)
-  //draw quad - cartesian coordinates with screen center at 0,0
-  (*glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  aspect := GLBox.ClientWidth / GLBox.ClientHeight;
-  if (aspect > 1) then
-     glOrtho(-2.0 * aspect, 2.0 * aspect, -2.0, 2.0, -0.1, -100)
-   else
-     glOrtho(-2.0, 2.0, -2.0 / aspect, 2.0 / aspect, -0.1, -100);
-
-  //glEnable(GL_DEPTH_TEST);
-  glTranslatef(0,0,gZoom*2);
-  glRotatef(90-gElevation,-1,0,0);
-  glRotatef(-gAzimuth,0,0,1);
-
-  MakeCube(gZoom); *)
+  //show cube object - optional
+  {$IFDEF cubeObject}
+  gCube.Size := gZoom/(max(GLBox.ClientWidth,GLBox.ClientHeight));
+  gCube.Azimuth:=gAzimuth;
+  gCube.Elevation:=gElevation;
+  gCube.Draw(GLBox.ClientWidth,GLBox.ClientHeight);
+  {$ENDIF}
   //show result
   GLbox.SwapBuffers;
 end;
