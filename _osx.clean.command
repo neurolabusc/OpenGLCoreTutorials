@@ -10,7 +10,7 @@ rm cubepro
 rm render
 rm tex
 rm text
-
+rm mtext
 
 #remove Cocoa as widgetset
 sed -i.bak '/BuildModes Active="MacOS"/d' ./basic.lps
@@ -19,6 +19,7 @@ sed -i.bak '/BuildModes Active="MacOS"/d' ./cubepro.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./render.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./tex.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./text.lps
+sed -i.bak '/BuildModes Active="MacOS"/d' ./mtext.lps
 
 rm *.~*
 rm  DS_STORE
@@ -36,13 +37,14 @@ rm clrbarLegacy
 rm cubeLegacy
 rm texLegacy
 rm textLegacy
-
+rm textmLegacy
 
 sed -i.bak '/BuildModes Active="MacOS"/d' ./basicLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./clrbarLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./cubeLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./texLegacy.lps
 sed -i.bak '/BuildModes Active="MacOS"/d' ./textLegacy.lps
+sed -i.bak '/BuildModes Active="MacOS"/d' ./textmLegacy.lps
 
 rm *.~*
 rm  DS_STORE

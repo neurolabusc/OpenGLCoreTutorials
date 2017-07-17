@@ -52,6 +52,13 @@ The project clrbar.lpr generates color bars with text legends. It builds off of 
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/clrbar.png" width="295">
 
+##### Project 7: Multi-channel signed distance fonts
+
+The previous two projects create traditional distance field fonts. While these look nice, they can not render sharp corners accurately. Those previous projects only use a single channel (e.g. gray scale), this project (mtext) uses multiple channels (red, green blue) to help encode corners using a method developed by [Viktor Chlumský](https://github.com/Chlumsky/msdfgen). In addition to the included font, you can generate your own using a simple [javascript program](https://github.com/Jam3/msdf-bmfont). This project generates both a conventional single channel (top) as well as a multichannel (bottom) fonts so you can see the difference. This is also provided in legacy OpenGL (textmLegacy).
+
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/mtext.png" width="223">
+
+
 ##### Recent Versions
 
  - 7/2017 Text and texture projects, ports to legacy OpenGL

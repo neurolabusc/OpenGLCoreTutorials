@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="textmLegacy.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="23"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="textmlegacymain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GLForm1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="143"/>
+        <CursorPos X="21" Y="156"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="gltext_legacy.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="108"/>
+        <CursorPos Y="126"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="gl_legacy_utils.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="21"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="glmtext_legacy.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="88"/>
+        <CursorPos X="10" Y="106"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="24" HistoryIndex="23">
+      <Position1>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="104" Column="60" TopLine="86"/>
+      </Position1>
+      <Position2>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="582" Column="12" TopLine="573"/>
+      </Position2>
+      <Position3>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="39" Column="24" TopLine="32"/>
+      </Position3>
+      <Position4>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="229" Column="20" TopLine="228"/>
+      </Position4>
+      <Position5>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="594" Column="24" TopLine="578"/>
+      </Position5>
+      <Position6>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="29" Column="62" TopLine="19"/>
+      </Position6>
+      <Position7>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="117" Column="34" TopLine="111"/>
+      </Position7>
+      <Position8>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="130" Column="25" TopLine="122"/>
+      </Position8>
+      <Position9>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="71" Column="27" TopLine="71"/>
+      </Position9>
+      <Position10>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="77" Column="23" TopLine="71"/>
+      </Position10>
+      <Position11>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="79" Column="20" TopLine="71"/>
+      </Position11>
+      <Position12>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="5" Column="81"/>
+      </Position12>
+      <Position13>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Column="19"/>
+      </Position13>
+      <Position14>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="137" Column="37" TopLine="135"/>
+      </Position14>
+      <Position15>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="45" Column="10" TopLine="35"/>
+      </Position15>
+      <Position16>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="75" Column="6" TopLine="67"/>
+      </Position16>
+      <Position17>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="46" Column="21" TopLine="36"/>
+      </Position17>
+      <Position18>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="80" Column="21" TopLine="70"/>
+      </Position18>
+      <Position19>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="85" Column="13" TopLine="70"/>
+      </Position19>
+      <Position20>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="105" Column="10" TopLine="89"/>
+      </Position20>
+      <Position21>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="124" Column="10" TopLine="108"/>
+      </Position21>
+      <Position22>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="156" Column="21" TopLine="143"/>
+      </Position22>
+      <Position23>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="5" Column="3"/>
+      </Position23>
+      <Position24>
+        <Filename Value="gltext_legacy.pas"/>
+        <Caret Line="64" Column="38" TopLine="40"/>
+      </Position24>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

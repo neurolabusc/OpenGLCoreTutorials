@@ -1,13 +1,15 @@
-unit gltext;
+unit glmtext;
 //openGL Text using distance field fonts https://github.com/libgdx/libgdx/wiki/Distance-field-fonts
-
+//traditional signed-distance field fonts use a single change, here we use multi-channel
+//  https://github.com/Chlumsky/msdfgen
+//  https://github.com/Jam3/msdf-bmfont
 {$mode objfpc}{$H+}
 {$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
 interface
 
 uses
   {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, {$ELSE}gl, glext, {$ENDIF}
-  LResources, Dialogs,Classes, SysUtils, Graphics, OpenGLContext, math;
+  LResources, Dialogs,Classes, SysUtils, Graphics, OpenGLContext, math, strutils;
 
 const
     kMaxChar = 2048; //maximum number of characters on screen, if >21845 change TPoint3i to uint32 and set glDrawElements to GL_UNSIGNED_INT
@@ -27,7 +29,7 @@ type
             Xx,Xy, Yx,Yy: single;
     end;
     TQuad = array [0..3] of Txyuv; //each character rectangle has 4 vertices
-  TGLText = class
+  TGLMText = class
   private
          {$IFDEF COREGL}vboVtx, vboIdx, vao,{$ELSE}displayLst,{$ENDIF} tex, shaderProgram: GLuint;
          {$IFDEF COREGL}uniform_mtx, {$ENDIF} uniform_clr, uniform_tex: GLint;
@@ -51,17 +53,13 @@ type
     function TextWidth(scale: single; s: string): single;
     procedure TextColor(red,green,blue: byte);
     procedure DrawText; //must be called while TOpenGLControl is current context
-    constructor Create(fnm : string; superSample: boolean; out success: boolean; Ctx: TOpenGLControl); //overlod;
+    constructor Create(fnm : string; out success: boolean; Ctx: TOpenGLControl); //overlod;
     Destructor  Destroy; override;
   end;
   {$IFNDEF COREGL}var GLErrorStr : string = '';{$ENDIF}
 
 implementation
 
-{$DEFINE TEX8BIT_NOT32} //we can save textures as 8-bit instead of 32-bit RGBA since we only need alpha
-{$IFNDEF TEX8BIT_NOT32}
-  Change ").r" to read ").r" in kFrag and kFragSuper
-{$ENDIF}
 
 const
 {$IFDEF COREGL}
@@ -76,38 +74,22 @@ const
 +#10'    gl_Position = ModelViewProjectionMatrix * vec4(ptx, -0.5, 1.0);'
 +#10'}';
 
-//super-sampling http://www.java-gaming.org/index.php?topic=33612.0
-kFragSuper = '#version 330'
-+#10'in vec2 uv;'
-+#10'out vec4 color;'
-+#10'uniform sampler2D tex;'
-+#10'uniform vec4 clr;'
-+#10'float contour(in float d, in float w) {'
-+#10'  return smoothstep(0.5 - w, 0.5 + w, d);'
-+#10'}'
-+#10'float samp(in vec2 uv, float w) {'
-+#10'  return contour(texture(tex, uv).r, w);'
-+#10'}'
-+#10'void main() {'
-+#10'  float dist = texture(tex,uv).r;'
-+#10'  float width = fwidth(dist);'
-+#10'  float alpha = contour( dist, width );'
-+#10'  float dscale = 0.354;'
-+#10'  vec2 duv = dscale * (dFdx(uv) + dFdy(uv));'
-+#10'  vec4 box = vec4(uv-duv, uv+duv);'
-+#10'  float asum = samp( box.xy, width ) + samp( box.zw, width )+ samp( box.xw, width ) + samp( box.zy, width );'
-+#10'  alpha = (alpha + 0.5 * asum) / 3.0;'
-+#10'  color = vec4(clr.r,clr.g,clr.b,alpha);'
-+#10'}';
 kFrag = '#version 330'
 +#10'in vec2 uv;'
 +#10'out vec4 color;'
 +#10'uniform sampler2D tex;'
 +#10'uniform vec4 clr;'
-+#10'const float smoothing = 1.0/16.0;'
++#10'float median(float r, float g, float b) {'
++#10'    return max(min(r, g), min(max(r, g), b));'
++#10'}'
 +#10'void main() {'
-+#10'  float dist = texture(tex,uv).r;'
-+#10'  float alpha = smoothstep(0.5 - smoothing, 0.5 + smoothing, dist);'
++#10'    //vec3 sample = texture(tex, uv).rgb;'
++#10'    //float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
++#10'    //float alpha = 1.0 - clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
++#10'    //color = vec4(clr.r,clr.g,clr.b,alpha);'
++#10'  vec3 sample = 1.0 - texture(tex, uv).rgb;'
++#10'  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
++#10'  float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
 +#10'  color = vec4(clr.r,clr.g,clr.b,alpha);'
 +#10'}';
 {$ELSE} //if core opengl, else legacy shaders
@@ -117,6 +99,7 @@ kVert ='varying vec4 vClr;'
 +#10'    vClr = gl_Color;'
 +#10'}';
 
+warning - this the fragment shader is not correct for legacy openGL - the shader from coreGL will need to be ported
 const kFrag = 'varying vec4 vClr;'
 +#10'uniform sampler2D tex;'
 +#10'uniform vec4 clr;'
@@ -124,29 +107,6 @@ const kFrag = 'varying vec4 vClr;'
 +#10'void main() {'
 +#10'  float dist = texture2D(tex,vClr.xy).r;'
 +#10'  float alpha = smoothstep(0.5 - smoothing, 0.5 + smoothing, dist);'
-+#10'  gl_FragColor = vec4(clr.rgb,alpha);'
-+#10'}';
-
-const kFragSuper = 'varying vec4 vClr;'
-+#10'uniform sampler2D tex;'
-+#10'uniform vec4 clr;'
-+#10'float contour(in float d, in float w) {'
-+#10'  return smoothstep(0.5 - w, 0.5 + w, d);'
-+#10'}'
-+#10'float samp(in vec2 uv, float w) {'
-+#10'  return contour(texture2D(tex, uv).r, w);'
-+#10'}'
-+#10'const float smoothing = 1.0/16.0;'
-+#10'void main() {'
-+#10'  vec2 uv = vClr.xy;'
-+#10'  float dist = texture2D(tex,uv).r;'
-+#10'  float width = fwidth(dist);'
-+#10'  float alpha = contour( dist, width );'
-+#10'  float dscale = 0.354;'
-+#10'  vec2 duv = dscale * (dFdx(uv) + dFdy(uv));'
-+#10'  vec4 box = vec4(uv-duv, uv+duv);'
-+#10'  float asum = samp( box.xy, width ) + samp( box.zw, width )+ samp( box.xw, width ) + samp( box.zy, width );'
-+#10'  alpha = (alpha + 0.5 * asum) / 3.0;'
 +#10'  gl_FragColor = vec4(clr.rgb,alpha);'
 +#10'}';
 {$ENDIF}
@@ -179,24 +139,28 @@ begin
 end;
 {$ENDIF} // BINARYMETRICS
 
-function LoadMetricsAsci(fnm: string; out fnt: TMetrics): boolean;
+function LoadMetricsJson(fnm: string; out fnt: TMetrics): boolean;
+//load JSON format created by
+// https://github.com/Jam3/msdf-bmfont
+//Identical attributes to Hiero ASCII FNT format, just saved in JSON
+const
+  idKey = '"id"';
 var
-   flst, strlst : TStringList;
-   r: TLResource;
-   s: string;
-   fLine,id, pages: integer;
+   pages, id, strBlockStart, strBlockEnd: integer;
+   str: string;
+   f: textfile;
 function GetFntVal(key: string): single;
 var
-   i,p: integer;
+   p, pComma: integer;
 begin
   result := 0;
-  for i := 1 to (strlst.Count-1) do begin
-        if pos(key,strlst[i]) <> 1 then continue;
-        p :=  length(key)+2;
-        result := strtofloatdef(copy(strlst[i],p,length(strlst[i])-p+1 ),0);
-        break;
-  end;
-end;
+  p := PosEx(key,str,strBlockStart);
+  if (p < 1) or (p > strBlockEnd) then exit;
+  p :=  p + length(key)+1;
+  pComma := PosEx(',',str,p);
+  if (pComma <= p) or (pComma > strBlockEnd) then exit;
+  result := strtofloatdef(copy(str,p, pComma-p), 0);
+end; //nested GetFntVal()
 begin
   result := false;
   for id := 0 to 255 do begin
@@ -210,56 +174,60 @@ begin
       fnt.M[id].yo := 0;
       fnt.M[id].xadv := 0; //critical to set: fnt format omits non-graphical characters (e.g. DEL): we skip characters whete X-advance = 0
   end;
-  fLst := TStringList.Create;
-  if fnm = '' then begin
-    r:=LazarusResources.Find('fnt');
-    if r=nil then raise Exception.Create('resource fnt is missing');
-    fLst.StrictDelimiter := true;
-    fLst.Delimiter := chr(10);
-    fLst.DelimitedText:=r.Value;
-  end else
-      fLst.LoadFromFile(fnm);
-  if fLst.Count < 2 then exit;
-
-  strlst:=TStringList.Create;
-  for fLine := 0 to fLst.Count-1 do begin
-        s := fLst[fLine]; //make sure to run CheckMesh after this, as these are indexed from 1!
-        if (length(s) < 1) or (s[1] = '#') then continue;
-        strlst.DelimitedText := s;
-        if strlst.Count < 7 then continue;
-        if (strlst[0] = 'common') then begin
-           fnt.lineHeight := GetFntVal('lineHeight');
-           fnt.base := GetFntVal('base');
-           fnt.scaleW := GetFntVal('scaleW');
-           fnt.scaleH := GetFntVal('scaleH');
-           pages := round(GetFntVal('pages'));
-           if (pages <> 1) then begin
-              showmessage('Only able to read single page fonts');
-              exit;
-           end;
-        end;
-        if (strlst[0] <> 'char') then continue;
-        id := round(GetFntVal('id'));
-        if (id < 0) or (id > 255) then continue;
-        fnt.M[id].x:=GetFntVal('x');
-        fnt.M[id].y:=GetFntVal('y');
-        fnt.M[id].w:=GetFntVal('width');
-        fnt.M[id].h:=GetFntVal('height');
-        fnt.M[id].xo:=GetFntVal('xoffset');
-        fnt.M[id].yo:=GetFntVal('yoffset');
-        fnt.M[id].xadv:=GetFntVal('xadvance');
+  if not fileexists(fnm) then begin
+     showmessage('Unable to find '+fnm);
+     exit;
   end;
-  fLst.free;
+  AssignFile(f, fnm);
+  Reset(f);
+  ReadLn(f, str);
+  CloseFile(f);
+  strBlockStart := PosEx('"common"',str,1);
+  strBlockEnd := PosEx('}',str, strBlockStart);
+  if (strBlockStart < 1) or (strBlockEnd < 1) then begin
+     showmessage('Error: no "common" section');
+     exit;
+  end;
+  fnt.lineHeight := GetFntVal('"lineHeight"');
+  fnt.base := GetFntVal('"base"');
+  fnt.scaleW := GetFntVal('"scaleW"');
+  fnt.scaleH := GetFntVal('"scaleH"');
+  pages := round(GetFntVal('"pages"'));
+  if (pages <> 1) then begin
+     showmessage('Only able to read single page fonts');
+     exit;
+  end;
+  strBlockStart := 1;
+  repeat
+        strBlockStart := PosEx(idKey,str,strBlockStart);
+        if strBlockStart < 1 then continue;
+        strBlockEnd := PosEx('}',str, strBlockStart);
+        if strBlockEnd < strBlockStart then
+           break;
+        id := round(GetFntVal(idKey));
+        if id = 0 then begin
+           strBlockStart := strBlockEnd;
+           continue;
+        end;
+        fnt.M[id].x := GetFntVal('"x"');
+        fnt.M[id].y := GetFntVal('"y"');
+        fnt.M[id].w := GetFntVal('"width"');
+        fnt.M[id].h := GetFntVal('"height"');
+        fnt.M[id].xo := GetFntVal('"xoffset"');
+        fnt.M[id].yo := GetFntVal('"yoffset"');
+        fnt.M[id].xadv := GetFntVal('"xadvance"');
+        strBlockStart := strBlockEnd;
+  until strBlockStart < 1;
   if (fnt.scaleW < 1) or (fnt.scaleH < 1) then exit;
   for id := 0 to 255 do begin //normalize from pixels to 0..1
       fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo);
-      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW;
-      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH;
+      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW + 1/fnt.scaleW; //+1/scaleW : indexed from 1 not 0?
+      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH + 1/fnt.scaleH; //+1/scaleH : indexed from 1 not 0?
       fnt.M[id].xEnd := fnt.M[id].x + (fnt.M[id].w/fnt.scaleW);
       fnt.M[id].yEnd := fnt.M[id].y + (fnt.M[id].h/fnt.scaleH);
   end;
   result := true;
-end;
+end; //LoadMetricsJson()
 
 procedure Rot(xK,yK, x,y: single; r: TRotMat; out Xout, Yout: single);
 // rotate points x,y and add to constant offset xK,yK
@@ -268,7 +236,7 @@ begin
      Yout := yK + (x * r.Yx) + (y * r.Yy);
 end;
 
-procedure TGLText.CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
+procedure TGLMText.CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
 var
   q: TQuad;
   x0,x1,y0,y1: single;
@@ -296,7 +264,7 @@ begin
   nChar := nChar + 1;
 end; //CharOut()
 
-procedure TGLText.TextOut(x,y,scale, angle: single; s: string); overload;
+procedure TGLMText.TextOut(x,y,scale, angle: single; s: string); overload;
 var
   i: integer;
   asci: byte;
@@ -316,22 +284,22 @@ begin
   end;
 end; //TextOut()
 
-procedure TGLText.TextOut(x,y,scale: single; s: string); overload;
+procedure TGLMText.TextOut(x,y,scale: single; s: string); overload;
 begin
      TextOut(x,y,scale,0,s);
 end; //TextOut()
 
-function TGLText.BaseHeight: single;
+function TGLMText.BaseHeight: single;
 begin
   result := metrics.base;
 end;
 
-function TGLText.LineHeight: single;
+function TGLMText.LineHeight: single;
 begin
      result := metrics.lineHeight;
 end;
 
-function TGLText.TextWidth(scale: single; s: string): single;
+function TGLMText.TextWidth(scale: single; s: string): single;
 var
   i: integer;
   asci: byte;
@@ -345,20 +313,20 @@ begin
   end;
 end; //TextWidth()
 
-procedure TGLText.TextColor(red,green,blue: byte);
+procedure TGLMText.TextColor(red,green,blue: byte);
 begin
      r := red/255;
      g := green/255;
      b := blue/255;
 end;
 
-procedure TGLText.ClearText;
+procedure TGLMText.ClearText;
 begin
   nChar := 0;
 end; //ClearText()
 
 {$IFDEF COREGL}
-procedure TGLText.UpdateVbo;
+procedure TGLMText.UpdateVbo;
 begin
   if (nChar < 1) or (not isChanged) then exit;
   fCrap:= random(888);
@@ -368,7 +336,7 @@ begin
   isChanged := false;
 end; //UpdateVbo()
 {$ELSE} //not CoreGL
-procedure TGLText.UpdateVbo;
+procedure TGLMText.UpdateVbo;
 var
   z,i: integer;
   q: TQuad;
@@ -402,7 +370,7 @@ end; //UpdateVbo()
 {$ENDIF}
 
 {$IFDEF COREGL}
-procedure TGLText.LoadBufferData;
+procedure TGLMText.LoadBufferData;
 type
     TPoint3i = Packed Record
       x,y,z   : uint16; //vertex indices: for >65535 indices use uint32 and use GL_UNSIGNED_INT for glDrawElements
@@ -448,14 +416,9 @@ begin
 end;
 {$ENDIF}
 
-function TGLText.LoadTex(fnm: string): boolean;
+function TGLMText.LoadTex(fnm: string): boolean;
 var
   px: TPicture;
-  {$IFDEF TEX8BIT_NOT32} //save 75% of texture size by only saving A not RGBA
-  ra: array of byte;
-  x,y,i: integer;
-  Ptr: PByte;
-  {$ENDIF}
 begin
   result := false;
   if (fnm <> '') and (not fileexists(fnm)) then begin
@@ -486,28 +449,13 @@ begin
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
   if px.Bitmap.PixelFormat <> pf32bit then
      exit; //distance stored in ALPHA field
-  {$IFDEF TEX8BIT_NOT32}
-  setlength(ra, px.Width * px.Height);
-  i := 0;
-  for y:= 1 to px.Height do begin
-      Ptr := px.Bitmap.RawImage.GetLineStart(y);
-      Inc(PByte(Ptr), 3);
-      for x := 1 to px.Width do begin
-          ra[i] := Ptr^;
-          Inc(PByte(Ptr), 4);
-          i := i + 1;
-      end;
-  end;
-  glTexImage2D(GL_TEXTURE_2D, 0,GL_RED, px.Width, px.Height, 0, GL_RED, GL_UNSIGNED_BYTE, @ra[0]);
-  setlength(ra,0);
-  {$ELSE}
-  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, GL_BGRA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
-  {$ENDIF}
+  //glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, GL_BGRA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
+  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, px.Width, px.Height, 0, GL_BGRA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
   px.Free;
   result := true;
 end;
 
-function TGLText.LoadMetrics(fnm : string): boolean;
+function TGLMText.LoadMetrics(fnm : string): boolean;
 var
    fntfnm: string;
 begin
@@ -515,8 +463,8 @@ begin
      if fnm = '' then
         fntfnm := ''
      else
-        fntfnm := changefileext(fnm,'.fnt');
-     result := LoadMetricsAsci(fntfnm,metrics);
+        fntfnm := changefileext(fnm,'.json');
+     result := LoadMetricsJson(fntfnm,metrics);
      {$IFDEF BINARYMETRICS}SaveMetricsBinary(fntfnm,metrics);{$ENDIF}
 end;
 
@@ -599,7 +547,7 @@ begin
 end;
 {$ENDIF} //{$IFNDEF COREGL}
 
-constructor TGLText.Create(fnm: string; superSample: boolean; out success: boolean; Ctx: TOpenGLControl);
+constructor TGLMText.Create(fnm: string; out success: boolean; Ctx: TOpenGLControl);
 begin
   success := true;
   tex := 0;
@@ -620,10 +568,7 @@ begin
   nChar := 0;
   isChanged := false;
   Ctx.MakeCurrent();
-  if superSample then
-     shaderProgram :=  initVertFrag(kVert, kFragSuper)
-  else
-      shaderProgram :=  initVertFrag(kVert, kFrag);
+  shaderProgram :=  initVertFrag(kVert, kFrag);
   if not LoadTex(fnm) then success := false;
   if not LoadMetrics(fnm) then success := false;
   uniform_clr := glGetUniformLocation(shaderProgram, pAnsiChar('clr'));
@@ -633,7 +578,7 @@ begin
   Ctx.ReleaseContext;
 end;
 
-procedure TGLText.DrawText;
+procedure TGLMText.DrawText;
 {$IFDEF COREGL}
 var
   mvp : TnMat44;
@@ -659,13 +604,13 @@ begin
   glUseProgram(0);
 end;
 
-destructor TGLText.Destroy;
+destructor TGLMText.Destroy;
 begin
   //call the parent destructor:
   inherited;
 end;
 
 initialization
- {$I fnt.lrs}
+ //{$I fnt.lrs}
 end.
 

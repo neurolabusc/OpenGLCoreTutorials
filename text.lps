@@ -15,8 +15,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="190"/>
-        <CursorPos X="5" Y="208"/>
+        <TopLine Value="61"/>
+        <CursorPos X="18" Y="74"/>
         <UsageCount Value="119"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -25,8 +25,8 @@
         <Filename Value="gltext.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="41"/>
-        <CursorPos X="33" Y="50"/>
+        <TopLine Value="314"/>
+        <CursorPos X="12" Y="325"/>
         <UsageCount Value="49"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -145,107 +145,127 @@
         <Loaded Value="True"/>
       </Unit17>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="textmain.pas"/>
-        <Caret Line="140" Column="31" TopLine="126"/>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="479" Column="42" TopLine="469"/>
       </Position1>
       <Position2>
-        <Filename Value="textmain.pas"/>
-        <Caret Line="13" Column="8" TopLine="6"/>
+        <Filename Value="../../../lazarus/lcl/graphtype.pp"/>
+        <Caret Line="216" Column="27" TopLine="206"/>
       </Position2>
       <Position3>
         <Filename Value="gltext.pas"/>
-        <Caret Line="479" Column="42" TopLine="469"/>
+        <Caret Line="480" Column="42" TopLine="469"/>
       </Position3>
       <Position4>
-        <Filename Value="../../../lazarus/lcl/graphtype.pp"/>
-        <Caret Line="216" Column="27" TopLine="206"/>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="442" Column="5" TopLine="431"/>
       </Position4>
       <Position5>
         <Filename Value="gltext.pas"/>
-        <Caret Line="480" Column="42" TopLine="469"/>
+        <Caret Line="475" Column="15" TopLine="467"/>
       </Position5>
       <Position6>
         <Filename Value="gltext.pas"/>
-        <Caret Line="442" Column="5" TopLine="431"/>
+        <Caret Line="444" Column="13" TopLine="437"/>
       </Position6>
       <Position7>
         <Filename Value="gltext.pas"/>
-        <Caret Line="475" Column="15" TopLine="467"/>
+        <Caret Line="481" Column="25" TopLine="473"/>
       </Position7>
       <Position8>
         <Filename Value="gltext.pas"/>
-        <Caret Line="444" Column="13" TopLine="437"/>
+        <Caret Line="482" Column="30" TopLine="474"/>
       </Position8>
       <Position9>
         <Filename Value="gltext.pas"/>
-        <Caret Line="481" Column="25" TopLine="473"/>
+        <Caret Line="485" Column="39" TopLine="477"/>
       </Position9>
       <Position10>
         <Filename Value="gltext.pas"/>
-        <Caret Line="482" Column="30" TopLine="474"/>
+        <Caret Line="64" Column="24" TopLine="52"/>
       </Position10>
       <Position11>
         <Filename Value="gltext.pas"/>
-        <Caret Line="485" Column="39" TopLine="477"/>
+        <Caret Line="88" Column="41" TopLine="72"/>
       </Position11>
       <Position12>
         <Filename Value="gltext.pas"/>
-        <Caret Line="64" Column="24" TopLine="52"/>
+        <Caret Line="91" Column="38" TopLine="75"/>
       </Position12>
       <Position13>
         <Filename Value="gltext.pas"/>
-        <Caret Line="88" Column="41" TopLine="72"/>
+        <Caret Line="108" Column="38" TopLine="92"/>
       </Position13>
       <Position14>
         <Filename Value="gltext.pas"/>
-        <Caret Line="91" Column="38" TopLine="75"/>
+        <Caret Line="124" Column="45" TopLine="108"/>
       </Position14>
       <Position15>
         <Filename Value="gltext.pas"/>
-        <Caret Line="108" Column="38" TopLine="92"/>
+        <Caret Line="136" Column="43" TopLine="120"/>
       </Position15>
       <Position16>
         <Filename Value="gltext.pas"/>
-        <Caret Line="124" Column="45" TopLine="108"/>
+        <Caret Line="529" Column="53" TopLine="527"/>
       </Position16>
       <Position17>
         <Filename Value="gltext.pas"/>
-        <Caret Line="136" Column="43" TopLine="120"/>
+        <Caret Line="488" Column="39" TopLine="479"/>
       </Position17>
       <Position18>
         <Filename Value="gltext.pas"/>
-        <Caret Line="529" Column="53" TopLine="527"/>
+        <Caret Line="629" Column="12" TopLine="620"/>
       </Position18>
       <Position19>
         <Filename Value="gltext.pas"/>
-        <Caret Line="488" Column="39" TopLine="479"/>
+        <Caret Line="42" Column="24" TopLine="28"/>
       </Position19>
       <Position20>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="629" Column="12" TopLine="620"/>
-      </Position20>
-      <Position21>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="42" Column="24" TopLine="28"/>
-      </Position21>
-      <Position22>
         <Filename Value="textmain.pas"/>
         <Caret Line="208" Column="36" TopLine="186"/>
-      </Position22>
-      <Position23>
+      </Position20>
+      <Position21>
         <Filename Value="textmain.pas"/>
         <Caret Line="119" Column="4" TopLine="107"/>
-      </Position23>
-      <Position24>
+      </Position21>
+      <Position22>
         <Filename Value="gltext.pas"/>
         <Caret Line="356" Column="23" TopLine="335"/>
+      </Position22>
+      <Position23>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="50" Column="36" TopLine="30"/>
+      </Position23>
+      <Position24>
+        <Filename Value="textmain.pas"/>
+        <Caret Line="133" Column="28" TopLine="130"/>
       </Position24>
       <Position25>
         <Filename Value="gltext.pas"/>
-        <Caret Line="50" Column="36" TopLine="30"/>
+        <Caret Line="113" Column="28" TopLine="90"/>
       </Position25>
+      <Position26>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="326" Column="3" TopLine="306"/>
+      </Position26>
+      <Position27>
+        <Filename Value="gltext.pas"/>
+        <Caret Line="581" Column="10" TopLine="560"/>
+      </Position27>
+      <Position28>
+        <Filename Value="textmain.pas"/>
+        <Caret Line="4" Column="50" TopLine="196"/>
+      </Position28>
+      <Position29>
+        <Filename Value="textmain.pas"/>
+        <Caret Line="11" Column="28"/>
+      </Position29>
+      <Position30>
+        <Filename Value="textmain.pas"/>
+        <Caret Line="8"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
