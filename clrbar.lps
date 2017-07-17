@@ -2,7 +2,7 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
-    <Units Count="21">
+    <Units Count="22">
       <Unit0>
         <Filename Value="clrbar.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -14,9 +14,8 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="177"/>
-        <CursorPos X="4" Y="186"/>
+        <TopLine Value="179"/>
+        <CursorPos X="74" Y="189"/>
         <UsageCount Value="128"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -24,11 +23,9 @@
       <Unit2>
         <Filename Value="gltext.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="576"/>
-        <CursorPos X="17" Y="589"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="69" Y="7"/>
         <UsageCount Value="58"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="texmain.pas"/>
@@ -148,8 +145,8 @@
       <Unit18>
         <Filename Value="glclrbar.pas"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="290"/>
-        <CursorPos X="29" Y="302"/>
+        <TopLine Value="287"/>
+        <CursorPos X="18" Y="303"/>
         <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit18>
@@ -165,108 +162,97 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit20>
+      <Unit21>
+        <Filename Value="glmtext.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="224"/>
+        <CursorPos Y="240"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit21>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="6" Column="79"/>
+        <Caret Line="324" Column="29" TopLine="305"/>
       </Position1>
       <Position2>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="59" Column="5" TopLine="48"/>
+        <Caret Line="6" Column="75"/>
       </Position2>
       <Position3>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="324" Column="29" TopLine="305"/>
+        <Caret Line="56" Column="7" TopLine="44"/>
       </Position3>
       <Position4>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="6" Column="75"/>
+        <Caret Line="195" Column="12" TopLine="181"/>
       </Position4>
       <Position5>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="56" Column="7" TopLine="44"/>
+        <Caret Line="269" TopLine="257"/>
       </Position5>
       <Position6>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="195" Column="12" TopLine="181"/>
+        <Caret Line="300" Column="14" TopLine="295"/>
       </Position6>
       <Position7>
         <Filename Value="clrbarmain.pas"/>
-        <Caret Line="269" TopLine="257"/>
+        <Caret Line="62" Column="32" TopLine="60"/>
       </Position7>
       <Position8>
-        <Filename Value="clrbarmain.pas"/>
-        <Caret Line="300" Column="14" TopLine="295"/>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="131" TopLine="119"/>
       </Position8>
       <Position9>
-        <Filename Value="clrbarmain.pas"/>
-        <Caret Line="62" Column="32" TopLine="60"/>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="123" Column="22" TopLine="105"/>
       </Position9>
       <Position10>
         <Filename Value="glclrbar.pas"/>
-        <Caret Line="131" TopLine="119"/>
+        <Caret Line="126" Column="42" TopLine="122"/>
       </Position10>
       <Position11>
         <Filename Value="glclrbar.pas"/>
-        <Caret Line="123" Column="22" TopLine="105"/>
+        <Caret Line="302" Column="29" TopLine="290"/>
       </Position11>
       <Position12>
-        <Filename Value="glclrbar.pas"/>
-        <Caret Line="126" Column="42" TopLine="122"/>
-      </Position12>
-      <Position13>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="17" Column="73" TopLine="16"/>
-      </Position13>
-      <Position14>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="460" Column="7" TopLine="451"/>
-      </Position14>
-      <Position15>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="409" Column="70" TopLine="391"/>
-      </Position15>
-      <Position16>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="443" Column="25" TopLine="438"/>
-      </Position16>
-      <Position17>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="614" Column="17" TopLine="594"/>
-      </Position17>
-      <Position18>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="41" Column="21" TopLine="29"/>
-      </Position18>
-      <Position19>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="29" Column="38" TopLine="11"/>
-      </Position19>
-      <Position20>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="255" Column="25" TopLine="250"/>
-      </Position20>
-      <Position21>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="588" Column="26" TopLine="565"/>
-      </Position21>
-      <Position22>
-        <Filename Value="gltext.pas"/>
-        <Caret Line="589" Column="20" TopLine="574"/>
-      </Position22>
-      <Position23>
-        <Filename Value="glclrbar.pas"/>
-        <Caret Line="302" Column="29" TopLine="290"/>
-      </Position23>
-      <Position24>
         <Filename Value="clrbarmain.pas"/>
         <Caret Line="4" Column="11"/>
-      </Position24>
-      <Position25>
+      </Position12>
+      <Position13>
         <Filename Value="clrbarmain.pas"/>
         <Caret Line="14" Column="80"/>
-      </Position25>
+      </Position13>
+      <Position14>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="10" Column="90"/>
+      </Position14>
+      <Position15>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="303" Column="86" TopLine="294"/>
+      </Position15>
+      <Position16>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="295" Column="23" TopLine="295"/>
+      </Position16>
+      <Position17>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="21" Column="48" TopLine="19"/>
+      </Position17>
+      <Position18>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="36" Column="22" TopLine="21"/>
+      </Position18>
+      <Position19>
+        <Filename Value="glclrbar.pas"/>
+        <Caret Line="303" Column="18" TopLine="287"/>
+      </Position19>
+      <Position20>
+        <Filename Value="glmtext.pas"/>
+        <Caret Line="56" Column="31" TopLine="43"/>
+      </Position20>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

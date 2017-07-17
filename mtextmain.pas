@@ -52,8 +52,8 @@ var
   gZoom : single = 2;
   gMouseY : integer = -1;
   gMouseX : integer = -1;
-  gGLText: TGLMText;
-  gGLText2: TGLText;
+  gGLText: glmtext.TGLText;
+  gGLText2: gltext.TGLText;
   gStr : string = 'The quick brown fox jumped over the lazy dog';
   {$IFDEF RETINA}
   gIsRetina : boolean = true;
@@ -116,12 +116,12 @@ begin
   {$IFDEF DARWIN}
   basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
   {$ENDIF}
-  fnm := basenm + 'font.png';
-  gGLText := TGLMText.Create(fnm, success, GLBox);
+  fnm := basenm + 'roboto.png';
+  gGLText := GLMText.TGLText.Create(fnm, success, GLBox);
   if not success then
     showmessage('Error: unable to load .png and .fnt '+fnm);
   fnm := basenm + 'hiero.png';//'serif.png';
-  gGLText2 := TGLText.Create(fnm, true, success, GLBox);
+  gGLText2 := GLText.TGLText.Create(fnm, true, success, GLBox);
   if not success then
     showmessage('Error: unable to load .png and .fnt '+fnm);
   GLBox.OnPaint:= @GLboxPaint;
@@ -137,7 +137,7 @@ begin
      gGLText.ClearText;
      gGLText.TextOut(gPositionX,gPositionY,gZoom, gStr);
      gGLText2.ClearText;
-     gGLText2.TextOut(gPositionX,gPositionY+(64*gZoom),gZoom, gStr);
+     gGLText2.TextOut(gPositionX,gPositionY+(gGLText2.LineHeight*gZoom),gZoom, gStr);
      GLBox.Invalidate;
 end;
 

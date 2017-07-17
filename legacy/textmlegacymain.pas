@@ -42,8 +42,8 @@ var
   gZoom : single = 1;
   gMouseY : integer = -1;
   gMouseX : integer = -1;
-  gGLText: TGLMText;
-  gGLText2: TGLText;
+  gGLText: glmtext_legacy.TGLText;
+  gGLText2: gltext_legacy.TGLText;
   gStr : string = 'The quick brown fox jumped over the lazy dog';
 
 
@@ -69,12 +69,12 @@ begin
      {$IFDEF DARWIN}
      basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
      {$ENDIF}
-     fnm := basenm + 'font.png';
-     gGLText := TGLMText.Create(fnm, success, GLBox);
+     fnm := basenm + 'roboto.png';
+     gGLText :=glmtext_legacy. TGLText.Create(fnm, success, GLBox);
      if not success then
        showmessage('Error: unable to load .png and .fnt '+fnm);
      fnm := basenm + 'hiero.png';//'serif.png';
-     gGLText2 := TGLText.Create(fnm, true, success, GLBox);
+     gGLText2 := gltext_legacy.TGLText.Create(fnm, true, success, GLBox);
      if not success then
        showmessage('Error: unable to load .png and .fnt '+fnm);
      if GLErrorStr <> '' then begin

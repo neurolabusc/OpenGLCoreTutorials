@@ -30,7 +30,7 @@ type
             Xx,Xy, Yx,Yy: single;
     end;
     TQuad = array [0..3] of Txyuv; //each character rectangle has 4 vertices
-  TGLMText = class
+  TGLText = class
   private
          {$IFDEF COREGL}vboVtx, vboIdx, vao,{$ELSE}displayLst,{$ENDIF} tex, shaderProgram: GLuint;
          {$IFDEF COREGL}uniform_mtx, {$ENDIF} uniform_clr, uniform_tex: GLint;
@@ -86,8 +86,8 @@ kFrag = '#version 330'
 +#10'void main() {'
 +#10'  vec3 sample = 1.0 - texture(tex, uv).rgb;'
 +#10'  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
-+#10'  float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
-+#10'  color = vec4(clr.r,clr.g,clr.b,alpha);'
++#10'  float opacity = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
++#10'  color = vec4(clr.r,clr.g,clr.b,1.0 - opacity);'
 +#10'}';
 {$ELSE} //if core opengl, else legacy shaders
 kVert ='varying vec4 vClr;'
@@ -105,8 +105,8 @@ const kFrag = 'varying vec4 vClr;'
 +#10'void main() {'
 +#10'  vec3 sample = 1.0 - texture2D(tex,vClr.xy).rgb;'
 +#10'  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
-+#10'  float alpha = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
-+#10'  gl_FragColor = vec4(clr.rgb, alpha);'
++#10'  float opacity = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
++#10'  gl_FragColor = vec4(clr.rgb, 1.0 - opacity);'
 +#10'}';
 {$ENDIF}
 //{$DEFINE BINARYMETRICS} //binary metrics are faster than reading default metrics created by Hiero
@@ -148,6 +148,7 @@ var
    pages, id, strBlockStart, strBlockEnd: integer;
    str: string;
    f: textfile;
+   r: TLResource;
 function GetFntVal(key: string): single;
 var
    p, pComma: integer;
@@ -173,14 +174,20 @@ begin
       fnt.M[id].yo := 0;
       fnt.M[id].xadv := 0; //critical to set: fnt format omits non-graphical characters (e.g. DEL): we skip characters whete X-advance = 0
   end;
-  if not fileexists(fnm) then begin
-     showmessage('Unable to find '+fnm);
-     exit;
+  if fnm = '' then begin
+    r:=LazarusResources.Find('jsn');
+    if r=nil then raise Exception.Create('resource jsn is missing');
+    str:=r.Value;
+  end else begin
+    if not fileexists(fnm) then begin
+       showmessage('Unable to find '+fnm);
+       exit;
+    end;
+    AssignFile(f, fnm);
+    Reset(f);
+    ReadLn(f, str);
+    CloseFile(f);
   end;
-  AssignFile(f, fnm);
-  Reset(f);
-  ReadLn(f, str);
-  CloseFile(f);
   strBlockStart := PosEx('"common"',str,1);
   strBlockEnd := PosEx('}',str, strBlockStart);
   if (strBlockStart < 1) or (strBlockEnd < 1) then begin
@@ -219,11 +226,14 @@ begin
   until strBlockStart < 1;
   if (fnt.scaleW < 1) or (fnt.scaleH < 1) then exit;
   for id := 0 to 255 do begin //normalize from pixels to 0..1
-      fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo);
-      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW + 1/fnt.scaleW; //+1/scaleW : indexed from 1 not 0?
-      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH + 1/fnt.scaleH; //+1/scaleH : indexed from 1 not 0?
-      fnt.M[id].xEnd := fnt.M[id].x + (fnt.M[id].w/fnt.scaleW);
-      fnt.M[id].yEnd := fnt.M[id].y + (fnt.M[id].h/fnt.scaleH);
+      //these next lines seem arbitrary, but they seem to compensate for vertical/horizontal offset vs Hiero
+      //fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo); //<- Hiero
+      fnt.M[id].yo := (0.17*fnt.base)-(fnt.M[id].h + fnt.M[id].yo); //<- msdf-bmfont
+      fnt.M[id].xo := fnt.M[id].xo- (0.17*fnt.base);// <-msdf-bmfont
+      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW+1/fnt.scaleW ; //+1/scaleW : indexed from 1 not 0?
+      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH+1/fnt.scaleH; //+1/scaleH : indexed from 1 not 0?
+      fnt.M[id].xEnd := fnt.M[id].x + (fnt.M[id].w/fnt.scaleW)-2/fnt.scaleW;
+      fnt.M[id].yEnd := fnt.M[id].y + (fnt.M[id].h/fnt.scaleH)-2/fnt.scaleH;
   end;
   result := true;
 end; //LoadMetricsJson()
@@ -235,7 +245,7 @@ begin
      Yout := yK + (x * r.Yx) + (y * r.Yy);
 end;
 
-procedure TGLMText.CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
+procedure TGLText.CharOut(x,y,scale: single; rx: TRotMat; asci: byte);
 var
   q: TQuad;
   x0,x1,y0,y1: single;
@@ -263,7 +273,7 @@ begin
   nChar := nChar + 1;
 end; //CharOut()
 
-procedure TGLMText.TextOut(x,y,scale, angle: single; s: string); overload;
+procedure TGLText.TextOut(x,y,scale, angle: single; s: string); overload;
 var
   i: integer;
   asci: byte;
@@ -283,22 +293,22 @@ begin
   end;
 end; //TextOut()
 
-procedure TGLMText.TextOut(x,y,scale: single; s: string); overload;
+procedure TGLText.TextOut(x,y,scale: single; s: string); overload;
 begin
      TextOut(x,y,scale,0,s);
 end; //TextOut()
 
-function TGLMText.BaseHeight: single;
+function TGLText.BaseHeight: single;
 begin
   result := metrics.base;
 end;
 
-function TGLMText.LineHeight: single;
+function TGLText.LineHeight: single;
 begin
      result := metrics.lineHeight;
 end;
 
-function TGLMText.TextWidth(scale: single; s: string): single;
+function TGLText.TextWidth(scale: single; s: string): single;
 var
   i: integer;
   asci: byte;
@@ -312,20 +322,20 @@ begin
   end;
 end; //TextWidth()
 
-procedure TGLMText.TextColor(red,green,blue: byte);
+procedure TGLText.TextColor(red,green,blue: byte);
 begin
      r := red/255;
      g := green/255;
      b := blue/255;
 end;
 
-procedure TGLMText.ClearText;
+procedure TGLText.ClearText;
 begin
   nChar := 0;
 end; //ClearText()
 
 {$IFDEF COREGL}
-procedure TGLMText.UpdateVbo;
+procedure TGLText.UpdateVbo;
 begin
   if (nChar < 1) or (not isChanged) then exit;
   fCrap:= random(888);
@@ -335,7 +345,7 @@ begin
   isChanged := false;
 end; //UpdateVbo()
 {$ELSE} //not CoreGL
-procedure TGLMText.UpdateVbo;
+procedure TGLText.UpdateVbo;
 var
   z,i: integer;
   q: TQuad;
@@ -369,7 +379,7 @@ end; //UpdateVbo()
 {$ENDIF}
 
 {$IFDEF COREGL}
-procedure TGLMText.LoadBufferData;
+procedure TGLText.LoadBufferData;
 type
     TPoint3i = Packed Record
       x,y,z   : uint16; //vertex indices: for >65535 indices use uint32 and use GL_UNSIGNED_INT for glDrawElements
@@ -415,7 +425,7 @@ begin
 end;
 {$ENDIF}
 
-function TGLMText.LoadTex(fnm: string): boolean;
+function TGLText.LoadTex(fnm: string): boolean;
 var
   px: TPicture;
 begin
@@ -454,7 +464,7 @@ begin
   result := true;
 end;
 
-function TGLMText.LoadMetrics(fnm : string): boolean;
+function TGLText.LoadMetrics(fnm : string): boolean;
 var
    fntfnm: string;
 begin
@@ -546,7 +556,7 @@ begin
 end;
 {$ENDIF} //{$IFNDEF COREGL}
 
-constructor TGLMText.Create(fnm: string; out success: boolean; Ctx: TOpenGLControl);
+constructor TGLText.Create(fnm: string; out success: boolean; Ctx: TOpenGLControl);
 begin
   success := true;
   tex := 0;
@@ -577,7 +587,7 @@ begin
   Ctx.ReleaseContext;
 end;
 
-procedure TGLMText.DrawText;
+procedure TGLText.DrawText;
 {$IFDEF COREGL}
 var
   mvp : TnMat44;
@@ -603,14 +613,17 @@ begin
   glUseProgram(0);
 end;
 
-destructor TGLMText.Destroy;
+destructor TGLText.Destroy;
 begin
   //call the parent destructor:
   inherited;
 end;
 
 initialization
- //{$I mfnt.lrs}
+ //To create your own default font, create a png and json with https://github.com/Jam3/msdf-bmfont
+ //next use lazres to convert it to a resource
+ //./lazres mfnt.lrs Arial.json=jsn Arial.png=png
+ {$I mfnt.lrs}
 end.
 
 

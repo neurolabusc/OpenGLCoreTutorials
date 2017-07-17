@@ -2,7 +2,6 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
     <Units Count="5">
       <Unit0>
         <Filename Value="clrbarLegacy.lpr"/>
@@ -19,27 +18,26 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="162"/>
-        <CursorPos X="28" Y="171"/>
+        <CursorPos X="25" Y="5"/>
         <UsageCount Value="61"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="glclrbar_legacy.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="21"/>
+        <TopLine Value="288"/>
+        <CursorPos X="51" Y="292"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="gltext_legacy.pas"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="455"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="456"/>
         <CursorPos X="22" Y="462"/>
         <UsageCount Value="16"/>
-        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="../gltext.pas"/>
@@ -47,7 +45,7 @@
         <UsageCount Value="9"/>
       </Unit4>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="glclrbar_legacy.pas"/>
         <Caret Line="325" Column="59" TopLine="313"/>
@@ -56,6 +54,14 @@
         <Filename Value="glclrbar_legacy.pas"/>
         <Caret Column="21"/>
       </Position2>
+      <Position3>
+        <Filename Value="glclrbar_legacy.pas"/>
+        <Caret Line="10" Column="90"/>
+      </Position3>
+      <Position4>
+        <Filename Value="glclrbar_legacy.pas"/>
+        <Caret Line="305" Column="34" TopLine="292"/>
+      </Position4>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

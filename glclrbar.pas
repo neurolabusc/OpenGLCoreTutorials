@@ -7,7 +7,7 @@ interface
 {$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
 
 uses
-  {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, gltext, {$ELSE}gl, glext, gltext_legacy,{$ENDIF}
+  {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, glmtext, {$ELSE}gl, glext, glmtext_legacy,{$ENDIF}
   Classes, SysUtils, Graphics, OpenGLContext, math, dialogs;
 
 type
@@ -299,7 +299,9 @@ begin
      fisTopOrRight := false;
      isRedraw := true;
      //Txt := TGLText.Create('/Users/rorden/Documents/pas/OpenGLCoreTutorials/legacy/numbers.png', true, isText, Ctx);
-     Txt := TGLText.Create('', true, isText, Ctx);
+     //Txt := TGLText.Create('', true, isText, Ctx); //<-single channel fonts gltext
+     Txt := TGLText.Create('',  isText, Ctx); //<-multi-channel channel fonts glmtext
+
      {$IFDEF COREGL}
      vao_point2d := 0;
      vbo_face2d := 0;

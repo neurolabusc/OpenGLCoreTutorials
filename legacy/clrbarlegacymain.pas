@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
-  Dialogs, Menus, gl, glext,  Types, glclrbar_legacy, gltext_legacy;
+  Dialogs, Menus, gl, glext,  Types, glclrbar_legacy;
 
 type
 

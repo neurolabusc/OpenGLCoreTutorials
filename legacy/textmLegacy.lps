@@ -2,6 +2,7 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
+    <BuildModes Active="Default"/>
     <Units Count="5">
       <Unit0>
         <Filename Value="textmLegacy.lpr"/>
@@ -18,8 +19,8 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="143"/>
-        <CursorPos X="21" Y="156"/>
+        <TopLine Value="69"/>
+        <CursorPos X="29" Y="72"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -42,13 +43,13 @@
         <Filename Value="glmtext_legacy.pas"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="88"/>
-        <CursorPos X="10" Y="106"/>
+        <TopLine Value="83"/>
+        <CursorPos X="47" Y="100"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit4>
     </Units>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="textmlegacymain.pas"/>
         <Caret Line="104" Column="60" TopLine="86"/>
@@ -145,6 +146,18 @@
         <Filename Value="gltext_legacy.pas"/>
         <Caret Line="64" Column="38" TopLine="40"/>
       </Position24>
+      <Position25>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="49" Column="16" TopLine="30"/>
+      </Position25>
+      <Position26>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="77" Column="25" TopLine="64"/>
+      </Position26>
+      <Position27>
+        <Filename Value="textmlegacymain.pas"/>
+        <Caret Line="46" Column="15" TopLine="35"/>
+      </Position27>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
