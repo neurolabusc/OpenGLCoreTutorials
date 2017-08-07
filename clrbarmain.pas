@@ -197,13 +197,13 @@ begin
       LUT[i].G := 0;
       LUT[i].B := 0;
   end;
-  gClrbar.SetLUT(1, LUT, 10,20);
+  gClrbar.SetLUT(1, LUT, -1,1);
   for i := 0 to 255 do begin
       LUT[i].R := 0;
       LUT[i].G := i;
       LUT[i].B := 0;
   end;
-  gClrbar.SetLUT(2, LUT, -5,5);
+  gClrbar.SetLUT(2, LUT, 1,7);
   if GLErrorStr <> '' then begin
      showmessage(GLErrorStr);
      GLErrorStr := '';

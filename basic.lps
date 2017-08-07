@@ -20,8 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="134"/>
-        <CursorPos Y="158"/>
+        <TopLine Value="139"/>
+        <CursorPos X="6" Y="145"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -79,7 +79,7 @@
         <Loaded Value="True"/>
       </Unit8>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="glcorearb.pas"/>
         <Caret Line="1828" Column="63" TopLine="1816"/>
@@ -180,6 +180,10 @@
         <Filename Value="basicmain.pas"/>
         <Caret Line="22" TopLine="2"/>
       </Position25>
+      <Position26>
+        <Filename Value="basicmain.pas"/>
+        <Caret Line="146" Column="8" TopLine="137"/>
+      </Position26>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

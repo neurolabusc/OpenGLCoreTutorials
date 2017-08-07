@@ -1,13 +1,17 @@
 unit cubelegacymain;
 
 {$mode objfpc}{$H+}
+//{$DEFINE DGL} //to use dglOpenGL
+{$IFNDEF DGL}
 {$DEFINE cubeObject} //optional: demonstrate glcube class
+{$ENDIF}
 interface
 
 uses
-    {$IFDEF cubeObject}glcube_legacy,{$ENDIF}
+    {$IFDEF cubeObject}glcube_legacy, math, {$ENDIF}
+     {$IFDEF DGL}dglOpenGL, {$ELSE}gl, glext,{$ENDIF}
     Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
-  Dialogs, gl, glext,  Types, math;
+  Dialogs, Types;
 
 type
 
@@ -48,12 +52,21 @@ var
 procedure  InitGL(var GLcontrol: TOpenGLControl);
 begin
   GLcontrol.MakeCurrent();
+  {$IFDEF DGL} //use dglOpenGL
+  if not InitOpenGL then begin
+      showmessage('Unable to load OpenGL 2.1');
+      halt();
+  end;
+  ReadExtensions;
+  {$ELSE}
   if not Load_GL_version_2_1() then begin
      GLcontrol.ReleaseContext;
      {$IFNDEF Windows} writeln('Unable to load OpenGL');{$ENDIF}
      showmessage('Unable to load OpenGL 2.1');
      halt();
   end;
+  {$ENDIF}
+  GLForm1.caption := glGetString(GL_VENDOR)+'; OpenGL= '+glGetString(GL_VERSION)+'; Shader='+glGetString(GL_SHADING_LANGUAGE_VERSION);
   {$IFDEF cubeObject}gCube := TGLCube.Create(GLcontrol);{$ENDIF}
   GLcontrol.ReleaseContext;
 end;

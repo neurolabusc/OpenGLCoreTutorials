@@ -75,20 +75,20 @@ const
 +#10'    gl_Position = ModelViewProjectionMatrix * vec4(ptx, -0.5, 1.0);'
 +#10'}';
 
-kFrag = '#version 330'
-+#10'in vec2 uv;'
-+#10'out vec4 color;'
-+#10'uniform sampler2D tex;'
-+#10'uniform vec4 clr;'
-+#10'float median(float r, float g, float b) {'
-+#10'    return max(min(r, g), min(max(r, g), b));'
-+#10'}'
-+#10'void main() {'
-+#10'  vec3 sample = 1.0 - texture(tex, uv).rgb;'
-+#10'  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
-+#10'  float opacity = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
-+#10'  color = vec4(clr.r,clr.g,clr.b,1.0 - opacity);'
-+#10'}';
+    kFrag = '#version 330'
+    +#10'in vec2 uv;'
+    +#10'out vec4 color;'
+    +#10'uniform sampler2D tex;'
+    +#10'uniform vec4 clr;'
+    +#10'float median(float r, float g, float b) {'
+    +#10'    return max(min(r, g), min(max(r, g), b));'
+    +#10'}'
+    +#10'void main() {'
+    +#10'  vec3 sample = 1.0 - texture(tex, uv).rgb;'
+    +#10'  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
+    +#10'  float opacity = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
+    +#10'  color = vec4(clr.r,clr.g,clr.b,opacity);'
+    +#10'}';
 {$ELSE} //if core opengl, else legacy shaders
 kVert ='varying vec4 vClr;'
 +#10'void main() {'
@@ -459,7 +459,7 @@ begin
   if px.Bitmap.PixelFormat <> pf32bit then
      exit; //distance stored in ALPHA field
   //glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, GL_BGRA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
-  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, px.Width, px.Height, 0, GL_BGRA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
+  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, px.Width, px.Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
   px.Free;
   result := true;
 end;

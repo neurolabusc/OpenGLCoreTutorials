@@ -3,7 +3,7 @@
   <ProjectSession>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="5">
+    <Units Count="6">
       <Unit0>
         <Filename Value="basicLegacy.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,8 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="120"/>
-        <CursorPos X="27" Y="127"/>
+        <TopLine Value="45"/>
+        <CursorPos X="135" Y="62"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -49,8 +49,15 @@
         <CursorPos X="21"/>
         <UsageCount Value="10"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="dglOpenGL.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19600"/>
+        <CursorPos X="32" Y="19614"/>
+        <UsageCount Value="10"/>
+      </Unit5>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="basiclegacymain.pas"/>
         <Caret Line="45" TopLine="31"/>
@@ -91,6 +98,22 @@
         <Filename Value="basiclegacymain.pas"/>
         <Caret Line="126" TopLine="116"/>
       </Position10>
+      <Position11>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="8" Column="25"/>
+      </Position11>
+      <Position12>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="61" Column="11" TopLine="47"/>
+      </Position12>
+      <Position13>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="7" Column="6"/>
+      </Position13>
+      <Position14>
+        <Filename Value="basiclegacymain.pas"/>
+        <Caret Line="8" Column="18"/>
+      </Position14>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
