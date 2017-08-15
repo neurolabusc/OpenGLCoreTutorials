@@ -40,24 +40,17 @@ The project tex.lpr loads two textures (fish and coral). Dragging the mouse re-p
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/textures.jpg" width="271">
 
-##### Project 5: Text
+##### Project 5: Smooth Fonts (aka multi-channel signed distance fonts)
 
-The project text.lpr draws text on the screen. Since OpenGL is specialized for drawing triangles, it is surprisingly hard to create nice text (which tends to exhibit smooth curves). This project uses [distance field fonts](http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf) using the technique described [here](https://github.com/libgdx/libgdx/wiki/Distance-field-fonts). The project reads [Hiero](https://github.com/libgdx/libgdx/wiki/Hiero) format fnt/png files, so you can create your own fonts if you wish. By default, the shaders use [supersampling](http://www.java-gaming.org/index.php?topic=33612.0) to enhance the quality. For a related WebGL-based implementation [click here](https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817). As a bonus, an analogous project textLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
+The project mtext.lpr draws text on the screen. Since OpenGL is specialized for drawing triangles, it is surprisingly hard to create nice text (which tends to exhibit smooth curves). This project uses [distance field fonts](http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf) using an advanced multi-channel technique described by [Viktor Chlumský](https://github.com/Chlumsky/msdfgen). In addition to the included font, you can generate your own using a simple [javascript program](https://github.com/Jam3/msdf-bmfont). This project generates both a conventional single channel (top) as well as a multichannel (bottom) fonts so you can see the difference. This is also provided in legacy OpenGL (textmLegacy).
 
-<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/font.png" width="285">
+<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/msdf.png" width="395">
 
 ##### Project 6: Color Intensity Scales
 
-The project clrbar.lpr generates color bars with text legends. It builds off of the text project. Like the text project, static features are rapidly drawn using a vertex buffer (or a display list if you use legacy OpenGL) rather than being regenerated. As a bonus, an analogous project clrbarLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
+The project clrbar.lpr generates color bars with text legends. It builds off of the font project. Like the font project, static features are rapidly drawn using a vertex buffer (or a display list if you use legacy OpenGL) rather than being regenerated. As a bonus, an analogous project clrbarLegacy.lpr is included that shows the same technique using legacy OpenGL (2.1), whereas the main project requires OpenGL 3.3.
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/clrbar.png" width="295">
-
-##### Project 7: Multi-channel signed distance fonts
-
-The previous two projects create traditional distance field fonts. While these look nice, they can not render sharp corners accurately. Those previous projects only use a single channel (e.g. gray scale), this project (mtext) uses multiple channels (red, green blue) to help encode corners using a method developed by [Viktor Chlumský](https://github.com/Chlumsky/msdfgen). In addition to the included font, you can generate your own using a simple [javascript program](https://github.com/Jam3/msdf-bmfont). This project generates both a conventional single channel (top) as well as a multichannel (bottom) fonts so you can see the difference. This is also provided in legacy OpenGL (textmLegacy).
-
-<img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/mtext.png" width="223">
-
 
 ##### Recent Versions
 

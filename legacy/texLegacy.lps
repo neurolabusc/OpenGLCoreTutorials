@@ -3,7 +3,7 @@
   <ProjectSession>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="texLegacy.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -19,20 +19,17 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="129"/>
-        <CursorPos X="3" Y="149"/>
+        <CursorPos X="28" Y="9"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="gltex_legacy.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="268"/>
         <CursorPos X="3" Y="281"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="gl_legacy_utils.pas"/>
@@ -40,108 +37,49 @@
         <CursorPos X="21"/>
         <UsageCount Value="10"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="gltex.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="2"/>
+        <CursorPos Y="8"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit4>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
         <Filename Value="texlegacymain.pas"/>
         <Caret Line="153" Column="39" TopLine="135"/>
       </Position1>
       <Position2>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="32" TopLine="27"/>
-      </Position2>
-      <Position3>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="262" TopLine="242"/>
-      </Position3>
-      <Position4>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="28" Column="56" TopLine="18"/>
-      </Position4>
-      <Position5>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="290" TopLine="282"/>
-      </Position5>
-      <Position6>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="16" Column="25" TopLine="8"/>
-      </Position6>
-      <Position7>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="77" Column="8" TopLine="71"/>
-      </Position7>
-      <Position8>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="117" Column="38" TopLine="114"/>
-      </Position8>
-      <Position9>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="135" TopLine="125"/>
-      </Position9>
-      <Position10>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="282" TopLine="270"/>
-      </Position10>
-      <Position11>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="328" Column="13" TopLine="309"/>
-      </Position11>
-      <Position12>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="312" Column="27" TopLine="308"/>
-      </Position12>
-      <Position13>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="317" Column="19" TopLine="313"/>
-      </Position13>
-      <Position14>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="322" Column="21" TopLine="308"/>
-      </Position14>
-      <Position15>
         <Filename Value="texlegacymain.pas"/>
         <Caret Line="39" Column="4" TopLine="35"/>
-      </Position15>
-      <Position16>
+      </Position2>
+      <Position3>
         <Filename Value="texlegacymain.pas"/>
         <Caret Line="78" TopLine="59"/>
-      </Position16>
-      <Position17>
+      </Position3>
+      <Position4>
         <Filename Value="texlegacymain.pas"/>
         <Caret Line="26" Column="43" TopLine="17"/>
-      </Position17>
-      <Position18>
+      </Position4>
+      <Position5>
         <Filename Value="texlegacymain.pas"/>
         <Caret Line="99" Column="20" TopLine="88"/>
-      </Position18>
-      <Position19>
+      </Position5>
+      <Position6>
         <Filename Value="texlegacymain.pas"/>
         <Caret Line="121" Column="20" TopLine="108"/>
-      </Position19>
-      <Position20>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="273" Column="35" TopLine="273"/>
-      </Position20>
-      <Position21>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="28" Column="24" TopLine="18"/>
-      </Position21>
-      <Position22>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="31" Column="24" TopLine="18"/>
-      </Position22>
-      <Position23>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="75" Column="27" TopLine="58"/>
-      </Position23>
-      <Position24>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="95" Column="27" TopLine="78"/>
-      </Position24>
-      <Position25>
-        <Filename Value="gltex_legacy.pas"/>
-        <Caret Line="98" Column="13" TopLine="81"/>
-      </Position25>
+      </Position6>
+      <Position7>
+        <Filename Value="texlegacymain.pas"/>
+        <Caret Line="149" Column="3" TopLine="129"/>
+      </Position7>
+      <Position8>
+        <Filename Value="texlegacymain.pas"/>
+        <Caret Line="9" Column="28"/>
+      </Position8>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

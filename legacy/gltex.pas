@@ -1,10 +1,11 @@
-unit gltex_legacy;
+unit gltex;
 //openGL texture
 
 {$mode objfpc}{$H+}
 
 interface
-//{$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
+{$include opts.inc} //<- defines CORE OpenGL >=3.3, else uses LEGACY OpenGL 2.1
+
 
 uses
   {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, {$ELSE}gl, glext, {$ENDIF}
@@ -168,10 +169,17 @@ begin
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+  {$IFDEF Darwin}
   if px.Bitmap.PixelFormat = pf32bit then
      internalformat := GL_BGRA
   else
       internalformat := GL_BGR;
+  {$ELSE}
+  if px.Bitmap.PixelFormat = pf32bit then
+     internalformat := GL_RGBA
+  else
+      internalformat := GL_RGB;
+  {$ENDIF}
    glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA8, px.Width, px.Height, 0, internalformat, GL_UNSIGNED_BYTE, PInteger(px.Bitmap.RawImage.Data));
   px.Free;
 end;

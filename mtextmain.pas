@@ -9,7 +9,7 @@ unit mtextmain;
 interface
 
 uses
-  gltext, glmtext, glcorearb, gl_core_utils, OpenGLContext, Classes, SysUtils, FileUtil, Forms,
+  glmtext, glcorearb, gl_core_utils, OpenGLContext, Classes, SysUtils, FileUtil, Forms,
   Controls, Graphics, Dialogs, ExtCtrls, gl_core_matrix, Types;
 type
   { TGLForm1 }
@@ -52,9 +52,8 @@ var
   gZoom : single = 2;
   gMouseY : integer = -1;
   gMouseX : integer = -1;
-  gGLText: glmtext.TGLText;
-  gGLText2: gltext.TGLText;
-  gStr : string = 'The quick brown fox jumped over the lazy dog';
+  gGLText, gGLText2: TGLText;
+  gStr : string = 'The quick brown fox jumped over the lazy dogs';
   {$IFDEF RETINA}
   gIsRetina : boolean = true;
 
@@ -116,15 +115,19 @@ begin
   {$IFDEF DARWIN}
   basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
   {$ENDIF}
-  fnm := basenm + 'roboto.png';
+  fnm := basenm + 'Roboto.png';
   gGLText := GLMText.TGLText.Create(fnm, success, GLBox);
   if not success then
-    showmessage('Error: unable to load .png and .fnt '+fnm);
-  fnm := basenm + 'hiero.png';//'serif.png';
-  gGLText2 := GLText.TGLText.Create(fnm, true, success, GLBox);
+    showmessage('Error: unable to load .png and .json '+fnm);
+  fnm := basenm + 'Roboto.png';
+  gGLText2 := GLMText.TGLText.Create(fnm, success, GLBox);
   if not success then
     showmessage('Error: unable to load .png and .fnt '+fnm);
   GLBox.OnPaint:= @GLboxPaint;
+  gGLText2.TextColor(0,0,0);//black
+  gGLText2.TextOut(6,66,2, 45, 'The five boxing wizards jump quickly.');
+  gGLText2.TextOut(6,36,1, 'Pack my box with five dozen liquor jugs.');
+  gGLText2.TextOut(6,16,0.5, 'Sphinx of black quartz, judge my vow.');
   UpdateText;
   if GLErrorStr <> '' then begin
      showmessage(GLErrorStr);
@@ -136,8 +139,6 @@ procedure TGLForm1.UpdateText;
 begin
      gGLText.ClearText;
      gGLText.TextOut(gPositionX,gPositionY,gZoom, gStr);
-     gGLText2.ClearText;
-     gGLText2.TextOut(gPositionX,gPositionY+(gGLText2.LineHeight*gZoom),gZoom, gStr);
      GLBox.Invalidate;
 end;
 
@@ -189,8 +190,8 @@ begin
   glClear(GL_COLOR_BUFFER_BIT);
     glEnable (GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  gGLText.DrawText;
   gGLText2.DrawText;
+  gGLText.DrawText;
   GLbox.SwapBuffers;
 end;
 

@@ -2,12 +2,13 @@ unit glclrbar;
 //openGL color bars
 
 {$mode objfpc}{$H+}
+{$include opts.inc} //<- defines CORE OpenGL >=3.3, else uses LEGACY OpenGL 2.1
 
 interface
-{$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
+
 
 uses
-  {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, glmtext, {$ELSE}gl, glext, glmtext_legacy,{$ENDIF}
+  {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, glmtext, {$ELSE}gl, glext, glmtext,{$ENDIF}
   Classes, SysUtils, Graphics, OpenGLContext, math, dialogs;
 
 type
@@ -56,8 +57,6 @@ type
   {$IFNDEF COREGL}var GLErrorStr : string = '';{$ENDIF}
 
 implementation
-
-uses clrbarmain;
 
 {$IFDEF COREGL}
 type

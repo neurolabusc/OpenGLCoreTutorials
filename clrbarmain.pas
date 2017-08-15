@@ -5,7 +5,6 @@ unit clrbarmain;
 {$ELSE}
   {$DEFINE RETINA} // <- requires Lazarus 1.9 svn 55355 or later
   // {$UNDEF RETINA} //disable retina support: works with older versions of lazarus
-  {$UNDEF GLEXT} //GLEXT incompatible with MacOS OpenGL versions >2.1
 {$ENDIF}
 interface
 

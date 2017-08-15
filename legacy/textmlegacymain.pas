@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
-  Dialogs, gl, glext, gltext_legacy, glmtext_legacy, Types;
+  Dialogs, gl, glext, glmtext, Types;
 
 type
 
@@ -42,9 +42,8 @@ var
   gZoom : single = 1;
   gMouseY : integer = -1;
   gMouseX : integer = -1;
-  gGLText: glmtext_legacy.TGLText;
-  gGLText2: gltext_legacy.TGLText;
-  gStr : string = 'The quick brown fox jumped over the lazy dog';
+  gGLText, gGLText2: TGLText;
+  gStr : string = 'The quick brown fox jumped over the lazy dogs';
 
 
 procedure  InitGL(var GLcontrol: TOpenGLControl);
@@ -70,11 +69,15 @@ begin
      basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
      {$ENDIF}
      fnm := basenm + 'roboto.png';
-     gGLText :=glmtext_legacy. TGLText.Create(fnm, success, GLBox);
+     gGLText := TGLText.Create(fnm, success, GLBox);
      if not success then
        showmessage('Error: unable to load .png and .fnt '+fnm);
-     fnm := basenm + 'hiero.png';//'serif.png';
-     gGLText2 := gltext_legacy.TGLText.Create(fnm, true, success, GLBox);
+     fnm := basenm + 'roboto.png';//'serif.png';
+     gGLText2 := TGLText.Create(fnm, success, GLBox);
+     gGLText2.TextColor(0,0,0);//black
+     gGLText2.TextOut(6,66,2, 45, 'The five boxing wizards jump quickly.');
+     gGLText2.TextOut(6,36,1, 'Pack my box with five dozen liquor jugs.');
+     gGLText2.TextOut(6,16,0.5, 'Sphinx of black quartz, judge my vow.');
      if not success then
        showmessage('Error: unable to load .png and .fnt '+fnm);
      if GLErrorStr <> '' then begin
@@ -128,8 +131,6 @@ procedure TGLForm1.UpdateText;
 begin
   gGLText.ClearText;
   gGLText.TextOut(gPositionX,gPositionY,gZoom, gStr);
-  gGLText2.ClearText;
-  gGLText2.TextOut(gPositionX,gPositionY+(64*gZoom),gZoom, gStr);
   GLBox.Invalidate;
 end;
 
@@ -152,8 +153,8 @@ begin
     glVertex3f( GLBox.ClientWidth,0, -1);
   glEnd;
   //draw text
-  gGLText.DrawText;
   gGLText2.DrawText;
+  gGLText.DrawText;
   //show result
   GLbox.SwapBuffers;
 end;

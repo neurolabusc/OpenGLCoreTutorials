@@ -8,7 +8,7 @@ unit cubelegacymain;
 interface
 
 uses
-    {$IFDEF cubeObject}glcube_legacy, math, {$ENDIF}
+    {$IFDEF cubeObject}glcube, math, {$ENDIF}
      {$IFDEF DGL}dglOpenGL, {$ELSE}gl, glext,{$ENDIF}
     Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
   Dialogs, Types;

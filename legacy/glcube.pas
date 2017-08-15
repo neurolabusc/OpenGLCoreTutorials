@@ -1,10 +1,10 @@
-unit glcube_legacy;
+unit glcube;
 //openGL cube
 
 {$mode objfpc}{$H+}
 
 interface
-//{$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
+{$include opts.inc} //<- defines CORE OpenGL >=3.3, else uses LEGACY OpenGL 2.1
 
 uses
   {$IFDEF COREGL}glcorearb, gl_core_utils, gl_core_matrix, {$ELSE}gl, glext, {$ENDIF}

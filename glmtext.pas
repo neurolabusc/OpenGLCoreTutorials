@@ -5,7 +5,7 @@ unit glmtext;
 //  https://github.com/Chlumsky/msdfgen
 //  https://github.com/Jam3/msdf-bmfont
 {$mode objfpc}{$H+}
-{$DEFINE COREGL} //<- if defined, required OpenGL >=3.3, else uses OpenGL 2.1
+{$include opts.inc} //<- defines CORE OpenGL >=3.3, else uses LEGACY OpenGL 2.1
 interface
 
 uses
@@ -75,7 +75,7 @@ const
 +#10'    gl_Position = ModelViewProjectionMatrix * vec4(ptx, -0.5, 1.0);'
 +#10'}';
 
-    kFrag = '#version 330'
+        kFrag = '#version 330'
     +#10'in vec2 uv;'
     +#10'out vec4 color;'
     +#10'uniform sampler2D tex;'
@@ -87,7 +87,7 @@ const
     +#10'  vec3 sample = 1.0 - texture(tex, uv).rgb;'
     +#10'  float sigDist = median(sample.r, sample.g, sample.b) - 0.5;'
     +#10'  float opacity = clamp(sigDist/fwidth(sigDist) + 0.5, 0.0, 1.0);'
-    +#10'  color = vec4(clr.r,clr.g,clr.b,opacity);'
+    +#10'  color = vec4(clr.r,clr.g,clr.b,1.0 - opacity);'
     +#10'}';
 {$ELSE} //if core opengl, else legacy shaders
 kVert ='varying vec4 vClr;'
@@ -226,14 +226,11 @@ begin
   until strBlockStart < 1;
   if (fnt.scaleW < 1) or (fnt.scaleH < 1) then exit;
   for id := 0 to 255 do begin //normalize from pixels to 0..1
-      //these next lines seem arbitrary, but they seem to compensate for vertical/horizontal offset vs Hiero
-      //fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo); //<- Hiero
-      fnt.M[id].yo := (0.17*fnt.base)-(fnt.M[id].h + fnt.M[id].yo); //<- msdf-bmfont
-      fnt.M[id].xo := fnt.M[id].xo- (0.17*fnt.base);// <-msdf-bmfont
-      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW+1/fnt.scaleW ; //+1/scaleW : indexed from 1 not 0?
-      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH+1/fnt.scaleH; //+1/scaleH : indexed from 1 not 0?
-      fnt.M[id].xEnd := fnt.M[id].x + (fnt.M[id].w/fnt.scaleW)-2/fnt.scaleW;
-      fnt.M[id].yEnd := fnt.M[id].y + (fnt.M[id].h/fnt.scaleH)-2/fnt.scaleH;
+      fnt.M[id].yo := fnt.base - (fnt.M[id].h + fnt.M[id].yo);
+      fnt.M[id].x:=fnt.M[id].x/fnt.scaleW;
+      fnt.M[id].y:=fnt.M[id].y/fnt.scaleH;
+      fnt.M[id].xEnd := fnt.M[id].x + (fnt.M[id].w/fnt.scaleW);
+      fnt.M[id].yEnd := fnt.M[id].y + (fnt.M[id].h/fnt.scaleH);
   end;
   result := true;
 end; //LoadMetricsJson()
@@ -432,6 +429,8 @@ begin
   result := false;
   if (fnm <> '') and (not fileexists(fnm)) then begin
      fnm := changefileext(fnm,'.png');
+     if not fileexists(fnm) then showmessage('a'+fnm) else showmessage('bb');
+
      if not fileexists(fnm) then
         exit;
   end;
@@ -445,7 +444,7 @@ begin
     px.Bitmap.Width:=0;
   end;
   if (px.Bitmap.PixelFormat <> pf32bit ) or (px.Bitmap.Width < 1) or (px.Bitmap.Height < 1) then begin
-     //showmessage('Error loading 32-bit power-of-two bitmap '+fnm);
+     showmessage('Error loading 32-bit power-of-two bitmap '+fnm);
      exit;
   end;
   bmpHt := px.Bitmap.Height;
