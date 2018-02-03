@@ -104,7 +104,7 @@ GLintptr = PtrInt; PGLintptr = ^GLintptr;
 PGLchar = Pchar;
 GLsync = Pointer;
 GLuint64 = QWord; PGLuint64 = ^GLuint64;
-GLint64 = Int64; PGLint64 = ^GLint64; 
+GLint64 = Int64; PGLint64 = ^GLint64;
 GLuint64EXT = QWord; PGLuint64EXT = ^GLuint64EXT;
 PGLvoid = Pointer;
 _cl_context = Pointer; P_cl_context  = ^_cl_context; //???STRUCT
@@ -2305,7 +2305,11 @@ end;
 function getProc(proc: PChar; var OK: boolean): Pointer;
 begin
   result := GetProcAddress(LibGL, proc);
-  if not Assigned(result) then OK := false;
+  //writeln('Loading ' + proc);
+  if not Assigned(result) then begin
+  	writeln('Unable to load ' + proc);
+  	OK := false;
+  end;
 end;
 {$ENDIF}
 

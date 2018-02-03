@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="10"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
     <Units Count="9">
       <Unit0>
         <Filename Value="basic.lpr"/>
@@ -18,9 +19,8 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="111"/>
-        <CursorPos X="4" Y="118"/>
+        <CursorPos X="15" Y="114"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -43,9 +43,10 @@
       </Unit3>
       <Unit4>
         <Filename Value="glcorearb.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="2290"/>
-        <CursorPos X="30" Y="2296"/>
+        <TopLine Value="2295"/>
+        <CursorPos X="5" Y="2308"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -73,7 +74,8 @@
       <Unit8>
         <Filename Value="gl_core_utils.pas"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="14" Y="9"/>
+        <TopLine Value="4"/>
+        <CursorPos X="14" Y="23"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -192,5 +194,9 @@
         <Caret Line="113" Column="58" TopLine="107"/>
       </Position28>
     </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode="default"/>
+    </RunParams>
   </ProjectSession>
 </CONFIG>
