@@ -19,6 +19,7 @@
         <ComponentName Value="GLForm1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="111"/>
         <CursorPos X="15" Y="114"/>
         <UsageCount Value="20"/>
@@ -43,10 +44,9 @@
       </Unit3>
       <Unit4>
         <Filename Value="glcorearb.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="2295"/>
-        <CursorPos X="5" Y="2308"/>
+        <TopLine Value="2296"/>
+        <CursorPos X="24" Y="2302"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit4>

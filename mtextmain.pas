@@ -16,7 +16,6 @@ type
   TGLForm1 = class(TForm)
     GLbox: TOpenGLControl;
     {$IFDEF RETINA}
-    procedure FormDestroy(Sender: TObject);
     procedure SetRetina;
     {$ENDIF}
     procedure FormShow(Sender: TObject);
@@ -30,6 +29,7 @@ type
     procedure GLboxMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure GLboxPaint(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
 
   public
