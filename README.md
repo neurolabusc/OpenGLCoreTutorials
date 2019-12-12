@@ -52,8 +52,13 @@ The project clrbar.lpr generates color bars with text legends. It builds off of 
 
 <img src="https://github.com/neurolabusc/OpenGLCoreTutorials/blob/master/clrbar.png" width="295">
 
+##### GTK3 Notes
+
+The GTK3 widgetset only supports the [OpenGL Core Profile and they will never add legacy profiles support to GTK3](https://www.bassi.io/articles/2015/02/17/using-opengl-with-gtk/). Therefore, the tutorials in this repository are particularly relevant to GTK3 developers. Another quirk is that GTK3 encapsulates the frame buffer. In contrast, with other widgetsets, framebuffer 0 is always the visible screen. Therefore, projects that call [glBindFramebuffer(GL_FRAMEBUFFER, 0) will not update the screen](https://stackoverflow.com/questions/47613181/opengl-strange-framebuffer-behavior-with-gtk-gl-area). 
+
 ##### Recent Versions
 
+ - 12/2019 GTK3 support
  - 7/2017 Text and texture projects, ports to legacy OpenGL
  - 1/2017 Initial release
 

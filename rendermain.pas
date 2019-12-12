@@ -300,7 +300,9 @@ begin
   drawBox(false);
   {$ENDIF}
   glUseProgram(gPrefs.programRaycast);
+  {$IFNDEF LCLgtk3} //https://stackoverflow.com/questions/47613181/opengl-strange-framebuffer-behavior-with-gtk-gl-area
   glBindFramebuffer(GL_FRAMEBUFFER, 0); //draw to screen
+  {$ENDIF}
   glActiveTexture(GL_TEXTURE2);
   glBindTexture(GL_TEXTURE_3D, gPrefs.intensityTexture3D);
   glUniform1i(gPrefs.intensityVolLoc, 2);

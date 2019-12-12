@@ -9,7 +9,7 @@ object GLForm1: TGLForm1
   Menu = MainMenu1
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object GLbox: TOpenGLControl
     Left = 0
     Height = 600

@@ -294,7 +294,7 @@ begin
   {$ENDIF}
   nglOrtho (0, w, 0, h, 0.1, 40);
   glClearColor(0.3, 0.5, 0.8, 1.0); //Set blue background
-  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT); //GTK3 requires latter
   glEnable (GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   //draw quad

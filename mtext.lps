@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <BuildModes Active="Default"/>
     <Units Count="9">
       <Unit0>
         <Filename Value="mtext.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <CursorPos X="42" Y="10"/>
         <UsageCount Value="127"/>
         <Loaded Value="True"/>
@@ -19,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="184"/>
-        <CursorPos X="48" Y="197"/>
+        <TopLine Value="172"/>
+        <CursorPos X="28" Y="190"/>
         <UsageCount Value="127"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -28,7 +28,7 @@
       <Unit2>
         <Filename Value="glmtext.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="585"/>
         <CursorPos X="62" Y="228"/>
         <UsageCount Value="28"/>
@@ -68,14 +68,13 @@
       <Unit8>
         <Filename Value="../../../lazarus/lcl/interfaces/carbon/carbonproc.pp"/>
         <UnitName Value="CarbonProc"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="552"/>
         <CursorPos X="13" Y="563"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit8>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="glmtext.pas"/>
         <Caret Line="230" Column="47" TopLine="220"/>
@@ -192,10 +191,6 @@
         <Filename Value="mtextmain.pas"/>
         <Caret Line="33" Column="15" TopLine="15"/>
       </Position29>
-      <Position30>
-        <Filename Value="../../../lazarus/lcl/interfaces/carbon/carbonproc.pp"/>
-        <Caret Line="563" Column="13" TopLine="552"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -97,7 +97,7 @@ begin
   GLForm1.caption := glGetString(GL_VENDOR)+'; OpenGL= '+glGetString(GL_VERSION)+'; Shader='+glGetString(GL_SHADING_LANGUAGE_VERSION);
   gShader.shaderProgram :=  initVertFrag(kVert,  kFrag);
   LoadBufferData;
-  glUseProgram(gShader.shaderProgram);
+  glUseProgram(0);
   GLcontrol.ReleaseContext;
   if GLErrorStr <> '' then begin
      showmessage(GLErrorStr);
@@ -145,10 +145,12 @@ end;
 procedure TGLForm1.GLboxPaint(Sender: TObject);
 begin
   glClearColor(0.1, 0.1, 0.2, 1.0); //Set blue background
+  //glEnable(GL_DEPTH_TEST);
   glDisable(GL_DEPTH_TEST);
   glEnable (GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT); //GTK3 requires latter
+  glUseProgram(gShader.shaderProgram);
   glBindVertexArray(gShader.vao_point);
   glUniform1f(gShader.uniform_angle, gRotation/90) ;
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

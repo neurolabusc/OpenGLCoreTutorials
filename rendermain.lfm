@@ -10,7 +10,7 @@ object GLForm1: TGLForm1
   OnCreate = FormCreate
   OnResize = FormResize
   Position = poScreenCenter
-  LCLVersion = '1.7'
+  LCLVersion = '2.1.0.0'
   object GLBox: TOpenGLControl
     Left = 0
     Height = 302
