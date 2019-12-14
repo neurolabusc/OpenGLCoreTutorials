@@ -21,6 +21,7 @@ object GLForm1: TGLForm1
     OpenGLMajorVersion = 3
     OpenGLMinorVersion = 3
     MultiSampling = 4
+    DepthBits = 0
     OnMouseDown = GLMouseDown
     OnMouseMove = GLMouseMove
     OnMouseUp = GLMouseUp

@@ -54,7 +54,10 @@ The project clrbar.lpr generates color bars with text legends. It builds off of 
 
 ##### GTK3 Notes
 
-The GTK3 widgetset only supports the [OpenGL Core Profile and they will never add legacy profiles support to GTK3](https://www.bassi.io/articles/2015/02/17/using-opengl-with-gtk/). Therefore, the tutorials in this repository are particularly relevant to GTK3 developers. Another quirk is that GTK3 encapsulates the frame buffer. In contrast, with other widgetsets, framebuffer 0 is always the visible screen. Therefore, projects that call [glBindFramebuffer(GL_FRAMEBUFFER, 0) will not update the screen](https://stackoverflow.com/questions/47613181/opengl-strange-framebuffer-behavior-with-gtk-gl-area). 
+The GTK3 widgetset only supports the [OpenGL Core Profile and they will never add legacy profiles support to GTK3](https://www.bassi.io/articles/2015/02/17/using-opengl-with-gtk/). Therefore, the tutorials in this repository are particularly relevant to GTK3 developers. However, GTK3 implmentation differs from the following widgetset in a few key ways.
+ - The screen appears to be framebuffer 1 not 0. Therefore, one must call `glBindFramebuffer(GL_FRAMEBUFFER, 1)` to write to the screen. An example is the render project if uncomments the `{$DEFINE TWO_PASS}`.
+ - In other widgetsets, one can set up additional framebuffers as soon as the OpenGL context is created. For GTK3, one must wait until the first paint call. Again, an example is the render project if uncomments the `{$DEFINE TWO_PASS}`. It appears that GTK3 does some additional initialization between these events.
+ - GTK3 does not yet enable [OpenGL multi-sampling](https://github.com/aklomp/gtk3-opengl/issues/2). For this reason, GTK3 is probably the widgetset of last resort for developers. OpenGL developers should consider targeting mature widgetsets like GTK2, Cocoa, QT5 or Windows if possible.
 
 ##### Recent Versions
 

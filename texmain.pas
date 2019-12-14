@@ -138,7 +138,8 @@ begin
   nglOrtho (0, GLBox.ClientWidth, 0, GLBox.ClientHeight, 0.1, 40);
   glClearColor(0.3, 0.5, 0.8, 1.0); //Set blue background
   glClear(GL_COLOR_BUFFER_BIT);
-    glEnable (GL_BLEND);
+  glDisable(GL_DEPTH_TEST);
+  glEnable (GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   gGLTexBG.DrawTex;
   gGLTex.DrawTex;

@@ -96,26 +96,6 @@ begin
   MessageDlg(fpsstr,mtInformation,[mbAbort, mbOK],0);
 end;
 
-{$IFDEF TWO_PASS}
-procedure  FrameBufferGL (initialSetup: boolean);
-begin
-  if not initialSetup then begin
-     glDeleteTextures(1,@gPrefs.backTexture);
-     glDeleteFramebuffers(1, @gPrefs.backFrameBuffer );
-  end;
-  glGenTextures(1, @gPrefs.backTexture);
-  glGenFramebuffers(1, @gPrefs.backFrameBuffer );
-  glBindTexture(GL_TEXTURE_2D, gPrefs.backTexture);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //GL_NEAREST
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);//GL_REPEAT
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, gPrefs.WINDOW_WIDTH, gPrefs.WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, nil);
-  glBindFramebuffer(GL_FRAMEBUFFER, gPrefs.backFrameBuffer );
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPrefs.backTexture, 0);
-end;
-{$ENDIF}
-
 procedure LoadBufferData (var vao: gluint);
 var
   vtx : packed array[0..23] of GLfloat = (
@@ -168,6 +148,31 @@ begin  //vboCube, vaoCube,
   //glDeleteBuffers(1, @vbo_point);
 end;
 
+{$IFDEF TWO_PASS}
+{$IFDEF LCLgtk3}
+var
+    isFirstPaint: boolean = true;
+{$ENDIF}
+
+procedure  FrameBufferGL (initialSetup: boolean);
+begin
+  if not initialSetup then begin
+     glDeleteTextures(1,@gPrefs.backTexture);
+     glDeleteFramebuffers(1, @gPrefs.backFrameBuffer );
+  end;
+  glGenTextures(1, @gPrefs.backTexture);
+  glGenFramebuffers(1, @gPrefs.backFrameBuffer );
+  glBindTexture(GL_TEXTURE_2D, gPrefs.backTexture);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //GL_NEAREST
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);//GL_REPEAT
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, gPrefs.WINDOW_WIDTH, gPrefs.WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, nil);
+  glBindFramebuffer(GL_FRAMEBUFFER, gPrefs.backFrameBuffer );
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPrefs.backTexture, 0);
+end;
+{$ENDIF}
+
 procedure resizeGL( w,h: integer);  //GLBox.ClientWidth
 var
    scale, whratio: single;
@@ -187,7 +192,12 @@ begin
        whratio := w/h;
        nglOrtho(whratio*-0.5*scale,whratio*0.5*scale,-0.5*scale,0.5*scale, 0.01, kMaxDistance);
      end;
-     {$IFDEF TWO_PASS}FrameBufferGL(false);{$ENDIF}
+     {$IFDEF TWO_PASS}
+     {$IFDEF LCLgtk3}
+     if isFirstPaint then exit; //not yet ready
+     {$ENDIF}
+     FrameBufferGL(false);
+     {$ENDIF}
 end;
 
 procedure rotateGL;
@@ -292,17 +302,26 @@ var
 begin
  rotateGL;
   mat44 := ngl_ModelViewProjectionMatrix;
+  glDisable(GL_DEPTH_TEST);
   {$IFDEF TWO_PASS}
+  {$IFDEF LCLgtk3}
+  if isFirstPaint then begin
+     FrameBufferGL(true);
+     isFirstPaint := false;
+  end;
+  {$ENDIF}
   //1st pass: create backface of cube
   glUseProgram(gPrefs.programBackface);
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, gPrefs.backFrameBuffer); //draw offscreen
   glUniformMatrix4fv(gPrefs.mvpLocBackface, 1, GL_FALSE, @mat44[0,0]);
   drawBox(false);
-  {$ENDIF}
-  glUseProgram(gPrefs.programRaycast);
   {$IFNDEF LCLgtk3} //https://stackoverflow.com/questions/47613181/opengl-strange-framebuffer-behavior-with-gtk-gl-area
-  glBindFramebuffer(GL_FRAMEBUFFER, 0); //draw to screen
+  glBindFramebuffer(GL_FRAMEBUFFER, 0); //draw to screen, GTK2, QT5, Cocoa, Windows
+  {$ELSE}
+  glBindFramebuffer(GL_FRAMEBUFFER, 1); //draw to screen, GTK3
   {$ENDIF}
+  {$ENDIF TWO_PASS}
+  glUseProgram(gPrefs.programRaycast);
   glActiveTexture(GL_TEXTURE2);
   glBindTexture(GL_TEXTURE_3D, gPrefs.intensityTexture3D);
   glUniform1i(gPrefs.intensityVolLoc, 2);
@@ -527,7 +546,9 @@ begin
   GLForm1.caption := glGetString(GL_VENDOR)+'; OpenGL= '+glGetString(GL_VERSION)+'; Shader='+glGetString(GL_SHADING_LANGUAGE_VERSION);
   //setup backface
   {$IFDEF TWO_PASS}
+  {$IFNDEF LCLgtk3}
   FrameBufferGL(true);
+  {$ENDIF}
   gPrefs.programBackface :=  initVertFrag(kVertBackface,  kFragBackface);
   gPrefs.mvpLocBackface := glGetUniformLocation(gPrefs.programBackface, pAnsiChar('ModelViewProjectionMatrix'));
   {$ENDIF}
@@ -662,4 +683,3 @@ begin
 end;
 
 end.
-

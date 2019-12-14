@@ -169,7 +169,7 @@ begin
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-  {$IFDEF Darwin}
+  {$IFDEF UNIX}
   if px.Bitmap.PixelFormat = pf32bit then
      internalformat := GL_BGRA
   else

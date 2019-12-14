@@ -296,6 +296,7 @@ begin
   glClearColor(0.3, 0.5, 0.8, 1.0); //Set blue background
   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT); //GTK3 requires latter
   glEnable (GL_BLEND);
+  glDisable(GL_DEPTH_TEST);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   //draw quad
   {$IFDEF DRAWQUAD}

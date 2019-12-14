@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectSession>
-    <Version Value="10"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
     <Units Count="22">
       <Unit0>
         <Filename Value="clrbar.lpr"/>
@@ -18,8 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="126"/>
-        <CursorPos Y="132"/>
+        <TopLine Value="279"/>
+        <CursorPos X="28" Y="299"/>
         <UsageCount Value="128"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -297,5 +298,9 @@
         <Caret Line="8" Column="25"/>
       </Position30>
     </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode="default"/>
+    </RunParams>
   </ProjectSession>
 </CONFIG>
