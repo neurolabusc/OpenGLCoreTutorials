@@ -163,6 +163,7 @@ begin
 end; //nested GetFntVal()
 begin
   result := false;
+  DefaultFormatSettings.DecimalSeparator := '.';
   for id := 0 to 255 do begin
       fnt.M[id].x := 0;
       fnt.M[id].y := 0;
