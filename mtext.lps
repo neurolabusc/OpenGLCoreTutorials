@@ -9,7 +9,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="42" Y="10"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="131"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,9 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="172"/>
-        <CursorPos X="28" Y="190"/>
-        <UsageCount Value="127"/>
+        <TopLine Value="114"/>
+        <CursorPos X="15" Y="131"/>
+        <UsageCount Value="131"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -29,9 +29,9 @@
         <Filename Value="glmtext.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="585"/>
-        <CursorPos X="62" Y="228"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="37"/>
+        <CursorPos X="22" Y="50"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -74,127 +74,131 @@
         <UsageCount Value="10"/>
       </Unit8>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="230" Column="47" TopLine="220"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="87" Column="19" TopLine="68"/>
       </Position1>
       <Position2>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="6" Column="40"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="89" Column="20" TopLine="68"/>
       </Position2>
       <Position3>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="90" Column="52" TopLine="75"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="90" Column="28" TopLine="68"/>
       </Position3>
       <Position4>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="88" Column="5" TopLine="76"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="91" Column="27" TopLine="68"/>
       </Position4>
       <Position5>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="236" Column="43" TopLine="220"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="144" Column="49" TopLine="124"/>
       </Position5>
       <Position6>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="159" Column="45" TopLine="143"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="52" Column="8" TopLine="38"/>
       </Position6>
       <Position7>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="239" Column="23" TopLine="221"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="87" Column="19" TopLine="70"/>
       </Position7>
       <Position8>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="598" Column="6" TopLine="584"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="89" Column="20" TopLine="70"/>
       </Position8>
       <Position9>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="625" Column="46" TopLine="606"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="90" Column="28" TopLine="70"/>
       </Position9>
       <Position10>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="437" Column="75" TopLine="423"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="91" Column="27" TopLine="70"/>
       </Position10>
       <Position11>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="454" Column="6" TopLine="433"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="144" Column="49" TopLine="121"/>
       </Position11>
       <Position12>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="533" Column="34" TopLine="514"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="57" Column="15" TopLine="39"/>
       </Position12>
       <Position13>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="545" Column="36" TopLine="526"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="50" Column="13" TopLine="39"/>
       </Position13>
       <Position14>
-        <Filename Value="glmtext.pas"/>
-        <Caret Line="8" Column="73"/>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="144" Column="32" TopLine="121"/>
       </Position14>
       <Position15>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="128" Column="13" TopLine="116"/>
+        <Caret Line="155" Column="16" TopLine="138"/>
       </Position15>
       <Position16>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="2" Column="88"/>
+        <Caret Line="169" Column="33" TopLine="146"/>
       </Position16>
       <Position17>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="143" Column="80" TopLine="76"/>
+        <Caret Line="55" Column="30" TopLine="43"/>
       </Position17>
       <Position18>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="155" Column="16" TopLine="136"/>
+        <Caret Line="144" Column="32" TopLine="121"/>
       </Position18>
       <Position19>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="169" Column="33" TopLine="150"/>
+        <Caret Line="155" Column="16" TopLine="132"/>
       </Position19>
       <Position20>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="12" Column="6"/>
+        <Caret Line="169" Column="33" TopLine="151"/>
       </Position20>
       <Position21>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="11" Column="2"/>
+        <Caret Line="50" Column="21" TopLine="38"/>
       </Position21>
       <Position22>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="12" Column="3"/>
+        <Caret Line="51" Column="13" TopLine="38"/>
       </Position22>
       <Position23>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="51" Column="16" TopLine="46"/>
+        <Caret Line="145" Column="32" TopLine="122"/>
       </Position23>
       <Position24>
-        <Filename Value="mtextmain.pas"/>
-        <Caret Line="145" TopLine="125"/>
+        <Filename Value="glmtext.pas"/>
+        <Caret Line="495" Column="68" TopLine="491"/>
       </Position24>
       <Position25>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="124" Column="24" TopLine="114"/>
+        <Caret Line="52" Column="8" TopLine="44"/>
       </Position25>
       <Position26>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="185" Column="48" TopLine="180"/>
+        <Caret Line="87" Column="19" TopLine="73"/>
       </Position26>
       <Position27>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="53" Column="3" TopLine="46"/>
+        <Caret Line="89" Column="20" TopLine="73"/>
       </Position27>
       <Position28>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="126" Column="3" TopLine="116"/>
+        <Caret Line="90" Column="28" TopLine="73"/>
       </Position28>
       <Position29>
         <Filename Value="mtextmain.pas"/>
-        <Caret Line="33" Column="15" TopLine="15"/>
+        <Caret Line="91" Column="27" TopLine="73"/>
       </Position29>
+      <Position30>
+        <Filename Value="mtextmain.pas"/>
+        <Caret Line="147" Column="49" TopLine="134"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0" ActiveMode="default"/>
+      <Modes ActiveMode="default"/>
     </RunParams>
   </ProjectSession>
 </CONFIG>

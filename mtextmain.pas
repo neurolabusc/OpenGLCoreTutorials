@@ -93,9 +93,12 @@ begin
 end;
 
 procedure TGLForm1.FormShow(Sender: TObject);
+const
+  pngnm = 'Roboto.png';
 var
   success: boolean;
   basenm, fnm: string;
+  dpiScale: single;
 begin
   //OSX has legacy and core modes:
   //    NSOpenGLProfileLegacy provides support for OpenGL 2.1/GLSL1.2 and earlier
@@ -112,10 +115,11 @@ begin
   SetRetina;
   {$ENDIF}
   basenm := extractfilepath(paramstr(0));
-  {$IFDEF DARWIN}
-  basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
-  {$ENDIF}
-  fnm := basenm + 'Roboto.png';
+  fnm := basenm + pngnm;
+  if (not fileexists(fnm)) then begin
+    basenm := extractfilepath(ExcludeTrailingPathDelimiter(basenm))+'Resources/';
+    fnm := basenm + pngnm;
+  end;
   gGLText := GLMText.TGLText.Create(fnm, success, GLBox);
   if not success then
     showmessage('Error: unable to load .png and .json '+fnm);
@@ -124,10 +128,13 @@ begin
   if not success then
     showmessage('Error: unable to load .png and .fnt '+fnm);
   GLBox.OnPaint:= @GLboxPaint;
+  dpiScale := Screen.PixelsPerInch / 96;
+  gZoom *= dpiScale;
   gGLText2.TextColor(0,0,0);//black
-  gGLText2.TextOut(6,66,2, 45, 'The five boxing wizards jump quickly.');
-  gGLText2.TextOut(6,36,1, 'Pack my box with five dozen liquor jugs.');
-  gGLText2.TextOut(6,16,0.5, 'Sphinx of black quartz, judge my vow.');
+  gGLText2.TextOut(6,66, dpiScale * 2, 45, 'xThe five boxing wizards jump quickly.');
+
+  gGLText2.TextOut(6,36, dpiScale * 1, 'Pack my box with five dozen liquor jugs.');
+  gGLText2.TextOut(6,16, dpiScale * 0.5, 'Sphinx of black quartz, judge my vow.');
   UpdateText;
   if GLErrorStr <> '' then begin
      showmessage(GLErrorStr);
